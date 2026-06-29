@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Movie Script Generator — Viral AI Storytelling Tool</title>
+<meta name="description" content="Transform any movie into a viral storytelling script for YouTube Shorts, TikTok, Instagram Reels & Facebook. AI-powered movie explainer script generator in Urdu, Hindi & English.">
+<meta name="keywords" content="movie explainer, viral script generator, youtube shorts script, movie storytelling, urdu script, hindi script, AI movie script, film explainer tool">
+<meta name="robots" content="index, follow">
+<meta name="author" content="Movie Script Generator">
+<link rel="canonical" href="https://srt-black.vercel.app/">
+
+<!-- Open Graph -->
+<meta property="og:title" content="Movie Script Generator — AI Viral Storytelling Tool">
+<meta property="og:description" content="Transform any movie into a viral script for YouTube Shorts, TikTok & Reels. AI-powered in Urdu, Hindi & English.">
+<meta property="og:image" content="https://srt-black.vercel.app/og.png">
+<meta property="og:url" content="https://srt-black.vercel.app/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Movie Script Generator">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Movie Script Generator — AI Viral Storytelling">
+<meta name="twitter:description" content="Turn any movie SRT into a viral script in seconds. Free AI tool.">
+<meta name="twitter:image" content="https://srt-black.vercel.app/og.png">
+
+<!-- Schema.org -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Movie Script Generator",
+  "description": "AI-powered viral movie storytelling script generator for YouTube Shorts, TikTok, Instagram Reels",
+  "url": "https://srt-black.vercel.app/",
+  "applicationCategory": "EntertainmentApplication",
+  "operatingSystem": "Web Browser",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "featureList": ["AI Script Generation", "SRT Analysis", "Multi-language Support", "Viral Content Creation"]
+}
+</script>
+
+<style>
+:root {
+  --primary: #4F46E5;
+  --primary-dark: #3730A3;
+  --accent: #7C3AED;
+  --bg: #F5F5FF;
+  --card: #FFFFFF;
+  --text: #1E1B4B;
+  --text-muted: #6B7280;
+  --border: #E5E7EB;
+  --success: #059669;
+  --shadow: 0 4px 24px rgba(79,70,229,0.10);
+  --radius: 16px;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', system-ui, sans-serif; min-height: 100vh; }
+
+/* NAV */
+nav { background: white; border-bottom: 1px solid var(--border); padding: 0 24px; height: 64px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+.logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+.logo-icon { width: 38px; height: 38px; background: linear-gradient(135deg, var(--primary), var(--accent)); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 20px; }
+.logo-text { font-size: 17px; font-weight: 700; color: var(--text); line-height: 1.2; }
+.logo-text span { display: block; font-size: 11px; font-weight: 400; color: var(--text-muted); }
+.nav-badge { background: linear-gradient(135deg, var(--primary), var(--accent)); color: white; font-size: 11px; padding: 4px 10px; border-radius: 20px; font-weight: 600; }
+
+/* HERO */
+.hero { text-align: center; padding: 60px 20px 40px; max-width: 700px; margin: 0 auto; }
+.hero-badge { display: inline-flex; align-items: center; gap: 6px; background: #EEF2FF; color: var(--primary); font-size: 13px; font-weight: 600; padding: 6px 14px; border-radius: 20px; margin-bottom: 20px; }
+.hero h1 { font-size: clamp(26px, 5vw, 42px); font-weight: 800; line-height: 1.2; margin-bottom: 16px; background: linear-gradient(135deg, var(--text), var(--primary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.hero p { color: var(--text-muted); font-size: 16px; line-height: 1.6; margin-bottom: 32px; }
+.stats { display: flex; justify-content: center; gap: 32px; flex-wrap: wrap; }
+.stat { text-align: center; }
+.stat strong { display: block; font-size: 22px; font-weight: 800; color: var(--primary); }
+.stat span { font-size: 12px; color: var(--text-muted); }
+
+/* MAIN */
+.container { max-width: 860px; margin: 0 auto; padding: 0 20px 60px; }
+
+/* STEPS */
+.step-card { background: white; border-radius: var(--radius); border: 1px solid var(--border); padding: 28px; margin-bottom: 20px; box-shadow: var(--shadow); }
+.step-header { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; }
+.step-num { width: 36px; height: 36px; background: linear-gradient(135deg, var(--primary), var(--accent)); color: white; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 15px; flex-shrink: 0; }
+.step-title { font-size: 17px; font-weight: 700; color: var(--text); }
+.step-sub { font-size: 13px; color: var(--text-muted); margin-top: 2px; }
+
+/* INPUTS */
+.input-row { display: flex; gap: 10px; }
+input[type=text], select, textarea {
+  width: 100%; padding: 12px 16px; border: 1.5px solid var(--border);
+  border-radius: 12px; font-size: 14px; color: var(--text);
+  background: #FAFAFA; outline: none; transition: border 0.2s;
+  font-family: inherit;
+}
+input[type=text]:focus, select:focus, textarea:focus { border-color: var(--primary); background: white; }
+textarea { min-height: 160px; resize: vertical; }
+
+.btn-search { background: linear-gradient(135deg, var(--primary), var(--accent)); color: white; border: none; border-radius: 12px; padding: 12px 22px; font-size: 14px; font-weight: 600; cursor: pointer; white-space: nowrap; transition: opacity 0.2s; }
+.btn-search:hover { opacity: 0.9; }
+.btn-search:disabled { opacity: 0.5; cursor: not-allowed; }
+
+/* SUBTITLE RESULTS */
+.sub-results { margin-top: 16px; display: none; }
+.sub-item { display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; border: 1.5px solid var(--border); border-radius: 12px; margin-bottom: 8px; background: #FAFAFA; cursor: pointer; transition: all 0.2s; gap: 10px; }
+.sub-item:hover { border-color: var(--primary); background: #EEF2FF; }
+.sub-item.selected { border-color: var(--primary); background: #EEF2FF; }
+.sub-name { font-size: 13px; font-weight: 600; color: var(--text); }
+.sub-lang { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+.btn-dl { background: white; border: 1.5px solid var(--primary); color: var(--primary); border-radius: 8px; padding: 6px 12px; font-size: 12px; font-weight: 600; cursor: pointer; text-decoration: none; }
+
+/* GRID */
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
+label.field-label { display: block; font-size: 12px; font-weight: 600; color: var(--text-muted); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
+
+/* OR DIVIDER */
+.or-divider { display: flex; align-items: center; gap: 12px; margin: 14px 0; color: var(--text-muted); font-size: 13px; }
+.or-divider::before, .or-divider::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+/* UPLOAD */
+.upload-area { border: 2px dashed var(--border); border-radius: 12px; padding: 24px; text-align: center; cursor: pointer; transition: all 0.2s; }
+.upload-area:hover { border-color: var(--primary); background: #EEF2FF; }
+.upload-area p { color: var(--text-muted); font-size: 14px; margin-top: 8px; }
+.upload-area strong { color: var(--primary); }
+
+/* GENERATE BTN */
+.btn-generate { width: 100%; padding: 16px; background: linear-gradient(135deg, var(--primary), var(--accent)); color: white; border: none; border-radius: 14px; font-size: 17px; font-weight: 700; cursor: pointer; transition: all 0.2s; box-shadow: 0 4px 20px rgba(79,70,229,0.3); display: flex; align-items: center; justify-content: center; gap: 10px; }
+.btn-generate:hover { transform: translateY(-1px); box-shadow: 0 6px 28px rgba(79,70,229,0.4); }
+.btn-generate:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+/* OUTPUT */
+.output-card { background: white; border-radius: var(--radius); border: 1px solid var(--border); padding: 28px; box-shadow: var(--shadow); display: none; margin-top: 20px; }
+.output-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; flex-wrap: gap; gap: 10px; }
+.output-title { font-size: 18px; font-weight: 700; color: var(--text); }
+.btn-copy { background: #EEF2FF; color: var(--primary); border: none; border-radius: 10px; padding: 8px 16px; font-size: 13px; font-weight: 600; cursor: pointer; }
+.output-content { font-size: 14px; line-height: 1.8; color: var(--text); white-space: pre-wrap; background: #FAFAFA; border-radius: 12px; padding: 20px; border: 1px solid var(--border); max-height: 600px; overflow-y: auto; }
+
+/* STATUS */
+.status-msg { text-align: center; padding: 20px; color: var(--text-muted); font-size: 14px; }
+.loader { display: inline-block; width: 20px; height: 20px; border: 3px solid #EEF2FF; border-top-color: var(--primary); border-radius: 50%; animation: spin 0.8s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* FOOTER */
+footer { background: white; border-top: 1px solid var(--border); padding: 24px; text-align: center; color: var(--text-muted); font-size: 13px; }
+
+/* RESPONSIVE */
+@media (max-width: 600px) {
+  .grid-2, .grid-3 { grid-template-columns: 1fr; }
+  .input-row { flex-direction: column; }
+  .hero { padding: 40px 20px 24px; }
+  .stats { gap: 20px; }
+  nav { padding: 0 16px; }
+  .step-card { padding: 20px; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="logo" href="/">
+    <div class="logo-icon">🎬</div>
+    <div class="logo-text">
+      Movie Script Generator
+      <span>AI Viral Storytelling Tool</span>
+    </div>
+  </a>
+  <div class="nav-badge">✨ Free AI Tool</div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">🚀 Powered by Llama AI</div>
+  <h1>Turn Any Movie Into a Viral Script</h1>
+  <p>Upload an SRT file and get a professional storytelling script for YouTube Shorts, TikTok, Instagram Reels & Facebook — in Urdu, Hindi or English.</p>
+  <div class="stats">
+    <div class="stat"><strong>10+</strong><span>Languages</span></div>
+    <div class="stat"><strong>5</strong><span>Platforms</span></div>
+    <div class="stat"><strong>Free</strong><span>Always</span></div>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="container">
+
+  <!-- STEP 1: Search SRT -->
+  <div class="step-card">
+    <div class="step-header">
+      <div class="step-num">1</div>
+      <div>
+        <div class="step-title">Find Movie Subtitles</div>
+        <div class="step-sub">Search by movie name to find SRT subtitle file</div>
+      </div>
+    </div>
+
+    <div class="input-row">
+      <input type="text" id="movieSearch" placeholder="Movie name likho... (e.g. Inception, Avengers)" onkeydown="if(event.key==='Enter')searchSubs()">
+      <select id="subLang" style="max-width:130px">
+        <option value="EN">English</option>
+        <option value="AR">Arabic</option>
+        <option value="HI">Hindi</option>
+        <option value="FR">French</option>
+        <option value="DE">German</option>
+        <option value="ES">Spanish</option>
+        <option value="TR">Turkish</option>
+        <option value="RU">Russian</option>
+      </select>
+      <button class="btn-search" id="searchBtn" onclick="searchSubs()">Search</button>
+    </div>
+
+    <div class="sub-results" id="subResults"></div>
+
+    <div class="or-divider">OR</div>
+
+    <div class="upload-area" onclick="document.getElementById('srtFile').click()">
+      <div style="font-size:32px">📂</div>
+      <p><strong>Click to upload SRT file</strong><br>Khud apna SRT file upload karo</p>
+      <input type="file" id="srtFile" accept=".srt" style="display:none" onchange="handleUpload(event)">
+    </div>
+    <div id="uploadStatus"></div>
+  </div>
+
+  <!-- STEP 2: SRT Content -->
+  <div class="step-card">
+    <div class="step-header">
+      <div class="step-num">2</div>
+      <div>
+        <div class="step-title">SRT Content</div>
+        <div class="step-sub">Search se auto-fill hoga ya khud paste karo</div>
+      </div>
+    </div>
+    <textarea id="srtContent" placeholder="SRT content yahan aayega automatically... ya khud paste karo"></textarea>
+  </div>
+
+  <!-- STEP 3: Options -->
+  <div class="step-card">
+    <div class="step-header">
+      <div class="step-num">3</div>
+      <div>
+        <div class="step-title">Script Settings</div>
+        <div class="step-sub">Movie details aur script options chunein</div>
+      </div>
+    </div>
+
+    <div style="margin-bottom:16px">
+      <label class="field-label">Movie Name</label>
+      <input type="text" id="movieName" placeholder="Movie ka naam likho...">
+    </div>
+
+    <div class="grid-2" style="margin-bottom:16px">
+      <div>
+        <label class="field-label">Script Language</label>
+        <select id="language">
+          <option value="Urdu">🇵🇰 Urdu</option>
+          <option value="Hindi">🇮🇳 Hindi</option>
+          <option value="Hinglish">🔀 Hinglish</option>
+          <option value="English">🇬🇧 English</option>
+          <option value="Arabic">🇸🇦 Arabic</option>
+        </select>
+      </div>
+      <div>
+        <label class="field-label">Platform</label>
+        <select id="platform">
+          <option value="YouTube Shorts">▶️ YouTube Shorts</option>
+          <option value="TikTok">🎵 TikTok</option>
+          <option value="Instagram Reels">📸 Instagram Reels</option>
+          <option value="Facebook Reels">👥 Facebook Reels</option>
+          <option value="YouTube Long Form">🎬 YouTube Long</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="grid-2" style="margin-bottom:16px">
+      <div>
+        <label class="field-label">Content Style</label>
+        <select id="style">
+          <option value="Thriller">🔥 Thriller</option>
+          <option value="Emotional">💔 Emotional</option>
+          <option value="Mystery">🕵️ Mystery</option>
+          <option value="Horror">👻 Horror</option>
+          <option value="Action">💥 Action</option>
+          <option value="Romance">❤️ Romance</option>
+          <option value="Comedy">😂 Comedy</option>
+          <option value="Motivational">💪 Motivational</option>
+          <option value="Plot Twist">😱 Plot Twist</option>
+          <option value="AI Decide Best">🤖 AI Decide Best</option>
+        </select>
+      </div>
+      <div>
+        <label class="field-label">Video Duration</label>
+        <select id="duration">
+          <option value="30 Seconds">⚡ 30 Seconds</option>
+          <option value="60 Seconds" selected>⏱ 60 Seconds</option>
+          <option value="90 Seconds">🕐 90 Seconds</option>
+          <option value="3 Minutes">📽 3 Minutes</option>
+          <option value="5 Minutes">🎞 5 Minutes</option>
+          <option value="10 Minutes">🎬 10 Minutes</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- GENERATE -->
+  <button class="btn-generate" id="genBtn" onclick="generate()">
+    <span>✨</span> Generate Viral Script
+  </button>
+
+  <!-- OUTPUT -->
+  <div class="output-card" id="outputCard">
+    <div class="output-header">
+      <div class="output-title">🎬 Your Viral Script</div>
+      <button class="btn-copy" onclick="copyScript()">📋 Copy Script</button>
+    </div>
+    <div class="output-content" id="outputContent"></div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>🎬 Movie Script Generator &nbsp;|&nbsp; AI-Powered Viral Storytelling &nbsp;|&nbsp; Free Forever</p>
+  <p style="margin-top:6px">Made for YouTube, TikTok, Instagram & Facebook Creators</p>
+</footer>
+
+<script>
+let srtText = '';
+
+// SEARCH SUBTITLES
+async function searchSubs() {
+  const movie = document.getElementById('movieSearch').value.trim();
+  const lang = document.getElementById('subLang').value;
+  if (!movie) return;
+
+  const btn = document.getElementById('searchBtn');
+  btn.disabled = true;
+  btn.textContent = 'Searching...';
+
+  const res = document.getElementById('subResults');
+  res.style.display = 'block';
+  res.innerHTML = '<div class="status-msg"><span class="loader"></span> Searching subtitles...</div>';
+
+  try {
+    const r = await fetch(`/api/subtitle?movie=${encodeURIComponent(movie)}&lang=${lang}`);
+    const data = await r.json();
+
+    if (!data.results || data.results.length === 0) {
+      res.innerHTML = '<div class="status-msg">No subtitles found. Try uploading manually.</div>';
+      return;
+    }
+
+    // Auto fill movie name
+    document.getElementById('movieName').value = movie;
+
+    let html = `<div style="font-size:13px;color:var(--text-muted);margin-bottom:10px">${data.results.length} subtitles found — select one to use:</div>`;
+    data.results.slice(0, 8).forEach((s, i) => {
+      html += `<div class="sub-item" onclick="selectSub(this, '${s.url}', '${s.name.replace(/'/g,"\\'")}')">
+        <div>
+          <div class="sub-name">${s.name || 'Subtitle ' + (i+1)}</div>
+          <div class="sub-lang">${s.language}</div>
+        </div>
+        <a class="btn-dl" href="${s.url}" target="_blank" onclick="event.stopPropagation()">⬇ Download</a>
+      </div>`;
+    });
+    res.innerHTML = html;
+  } catch(e) {
+    res.innerHTML = `<div class="status-msg">Error: ${e.message}</div>`;
+  }
+
+  btn.disabled = false;
+  btn.textContent = 'Search';
+}
+
+// SELECT SUBTITLE
+async function selectSub(el, url, name) {
+  document.querySelectorAll('.sub-item').forEach(i => i.classList.remove('selected'));
+  el.classList.add('selected');
+  document.getElementById('srtContent').value = 'Downloading SRT...';
+
+  try {
+    const r = await fetch(`/api/subtitle?download=${encodeURIComponent(url)}`);
+    const text = await r.text();
+    if (text && text.includes('-->')) {
+      document.getElementById('srtContent').value = text;
+      srtText = text;
+    } else {
+      document.getElementById('srtContent').value = '';
+      alert('SRT auto-load nahi ho saka. Please manually download karein aur paste karein.');
+    }
+  } catch(e) {
+    document.getElementById('srtContent').value = '';
+  }
+}
+
+// UPLOAD SRT
+function handleUpload(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    srtText = e.target.result;
+    document.getElementById('srtContent').value = srtText;
+    document.getElementById('uploadStatus').innerHTML = `<p style="color:var(--success);font-size:13px;margin-top:8px">✅ ${file.name} uploaded!</p>`;
+    if (!document.getElementById('movieName').value) {
+      document.getElementById('movieName').value = file.name.replace('.srt','').replace(/_/g,' ');
+    }
+  };
+  reader.readAsText(file);
+}
+
+// GENERATE SCRIPT
+async function generate() {
+  const srt = document.getElementById('srtContent').value.trim() || srtText;
+  const movie = document.getElementById('movieName').value.trim();
+
+  if (!movie) { alert('Movie ka naam likho!'); return; }
+  if (!srt) { alert('SRT file upload karo ya content paste karo!'); return; }
+
+  const btn = document.getElementById('genBtn');
+  btn.disabled = true;
+  btn.innerHTML = '<span class="loader"></span> Generating Script...';
+
+  const output = document.getElementById('outputCard');
+  output.style.display = 'block';
+  document.getElementById('outputContent').textContent = '⏳ AI script generate kar raha hai... Thoda wait karo...';
+  output.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+  try {
+    const r = await fetch('/api/generate', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        movie,
+        srt: srt.slice(0, 10000),
+        language: document.getElementById('language').value,
+        platform: document.getElementById('platform').value,
+        style: document.getElementById('style').value,
+        duration: document.getElementById('duration').value
+      })
+    });
+    const data = await r.json();
+    if (data.error) throw new Error(data.error);
+    document.getElementById('outputContent').textContent = data.script;
+  } catch(e) {
+    document.getElementById('outputContent').textContent = 'Error: ' + e.message;
+  }
+
+  btn.disabled = false;
+  btn.innerHTML = '<span>✨</span> Generate Viral Script';
+}
+
+// COPY
+function copyScript() {
+  const text = document.getElementById('outputContent').textContent;
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = document.querySelector('.btn-copy');
+    btn.textContent = '✅ Copied!';
+    setTimeout(() => btn.textContent = '📋 Copy Script', 2000);
+  });
+}
+</script>
+</body>
+</html>
+
