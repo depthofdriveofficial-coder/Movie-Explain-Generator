@@ -1,0 +1,7 @@
+{
+  "rewrites": [
+    { "source": "/api/subtitle", "destination": "/api/subtitle.py" },
+    { "source": "/api/generate", "destination": "/api/generate.py" },
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
+}
