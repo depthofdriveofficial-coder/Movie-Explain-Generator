@@ -3,199 +3,171 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Movie Script Generator — Viral AI Storytelling Tool</title>
-<meta name="description" content="Transform any movie into a viral storytelling script for YouTube Shorts, TikTok, Instagram Reels & Facebook. AI-powered movie explainer script generator in Urdu, Hindi & English.">
-<meta name="keywords" content="movie explainer, viral script generator, youtube shorts script, movie storytelling, urdu script, hindi script, AI movie script, film explainer tool">
+<title>Movie Explain Generator — AI Viral Script Tool</title>
+<meta name="description" content="Generate viral movie storytelling scripts for YouTube Shorts, TikTok, Instagram Reels in English, Roman Urdu, Roman Hindi and more. Free AI-powered tool.">
+<meta name="keywords" content="movie explainer, viral script generator, youtube shorts script, movie storytelling, urdu script, hindi script, AI movie script, film explainer">
 <meta name="robots" content="index, follow">
-<meta name="author" content="Movie Script Generator">
 <link rel="canonical" href="https://srt-black.vercel.app/">
-
-<!-- Open Graph -->
-<meta property="og:title" content="Movie Script Generator — AI Viral Storytelling Tool">
-<meta property="og:description" content="Transform any movie into a viral script for YouTube Shorts, TikTok & Reels. AI-powered in Urdu, Hindi & English.">
-<meta property="og:image" content="https://srt-black.vercel.app/og.png">
-<meta property="og:url" content="https://srt-black.vercel.app/">
+<meta property="og:title" content="Movie Explain Generator — AI Viral Script Tool">
+<meta property="og:description" content="Generate viral movie storytelling scripts for YouTube, TikTok & Reels. Free AI tool.">
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="Movie Script Generator">
-
-<!-- Twitter Card -->
+<meta property="og:url" content="https://srt-black.vercel.app/">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Movie Script Generator — AI Viral Storytelling">
-<meta name="twitter:description" content="Turn any movie SRT into a viral script in seconds. Free AI tool.">
-<meta name="twitter:image" content="https://srt-black.vercel.app/og.png">
-
-<!-- Schema.org -->
 <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebApplication",
-  "name": "Movie Script Generator",
-  "description": "AI-powered viral movie storytelling script generator for YouTube Shorts, TikTok, Instagram Reels",
-  "url": "https://srt-black.vercel.app/",
-  "applicationCategory": "EntertainmentApplication",
-  "operatingSystem": "Web Browser",
-  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-  "featureList": ["AI Script Generation", "SRT Analysis", "Multi-language Support", "Viral Content Creation"]
-}
+{"@context":"https://schema.org","@type":"WebApplication","name":"Movie Explain Generator","description":"AI-powered viral movie storytelling script generator","url":"https://srt-black.vercel.app/","applicationCategory":"EntertainmentApplication","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
 </script>
-
 <style>
-:root {
-  --primary: #4F46E5;
-  --primary-dark: #3730A3;
-  --accent: #7C3AED;
-  --bg: #F5F5FF;
-  --card: #FFFFFF;
-  --text: #1E1B4B;
-  --text-muted: #6B7280;
-  --border: #E5E7EB;
-  --success: #059669;
-  --shadow: 0 4px 24px rgba(79,70,229,0.10);
-  --radius: 16px;
+:root{
+  --primary:#4F46E5;
+  --accent:#7C3AED;
+  --bg:#F5F5FF;
+  --card:#FFFFFF;
+  --text:#1E1B4B;
+  --muted:#6B7280;
+  --border:#E5E7EB;
+  --success:#059669;
+  --radius:16px;
+  --shadow:0 4px 24px rgba(79,70,229,0.10);
 }
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', system-ui, sans-serif; min-height: 100vh; }
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;min-height:100vh;}
 
 /* NAV */
-nav { background: white; border-bottom: 1px solid var(--border); padding: 0 24px; height: 64px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
-.logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
-.logo-icon { width: 38px; height: 38px; background: linear-gradient(135deg, var(--primary), var(--accent)); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 20px; }
-.logo-text { font-size: 17px; font-weight: 700; color: var(--text); line-height: 1.2; }
-.logo-text span { display: block; font-size: 11px; font-weight: 400; color: var(--text-muted); }
-.nav-badge { background: linear-gradient(135deg, var(--primary), var(--accent)); color: white; font-size: 11px; padding: 4px 10px; border-radius: 20px; font-weight: 600; }
+nav{background:#fff;border-bottom:1px solid var(--border);padding:0 24px;height:64px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,0.06);}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.logo-icon{width:38px;height:38px;background:linear-gradient(135deg,var(--primary),var(--accent));border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;}
+.logo-text{font-size:16px;font-weight:700;color:var(--text);line-height:1.2;}
+.logo-sub{font-size:11px;font-weight:400;color:var(--muted);}
+.badge{background:linear-gradient(135deg,var(--primary),var(--accent));color:#fff;font-size:11px;padding:4px 12px;border-radius:20px;font-weight:600;white-space:nowrap;}
 
 /* HERO */
-.hero { text-align: center; padding: 60px 20px 40px; max-width: 700px; margin: 0 auto; }
-.hero-badge { display: inline-flex; align-items: center; gap: 6px; background: #EEF2FF; color: var(--primary); font-size: 13px; font-weight: 600; padding: 6px 14px; border-radius: 20px; margin-bottom: 20px; }
-.hero h1 { font-size: clamp(26px, 5vw, 42px); font-weight: 800; line-height: 1.2; margin-bottom: 16px; background: linear-gradient(135deg, var(--text), var(--primary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-.hero p { color: var(--text-muted); font-size: 16px; line-height: 1.6; margin-bottom: 32px; }
-.stats { display: flex; justify-content: center; gap: 32px; flex-wrap: wrap; }
-.stat { text-align: center; }
-.stat strong { display: block; font-size: 22px; font-weight: 800; color: var(--primary); }
-.stat span { font-size: 12px; color: var(--text-muted); }
+.hero{text-align:center;padding:52px 20px 36px;max-width:680px;margin:0 auto;}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;background:#EEF2FF;color:var(--primary);font-size:13px;font-weight:600;padding:6px 14px;border-radius:20px;margin-bottom:18px;}
+.hero h1{font-size:clamp(24px,5vw,40px);font-weight:800;line-height:1.2;margin-bottom:14px;background:linear-gradient(135deg,var(--text),var(--primary));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.hero p{color:var(--muted);font-size:15px;line-height:1.7;margin-bottom:28px;}
+.stats{display:flex;justify-content:center;gap:28px;flex-wrap:wrap;}
+.stat strong{display:block;font-size:22px;font-weight:800;color:var(--primary);}
+.stat span{font-size:12px;color:var(--muted);}
 
-/* MAIN */
-.container { max-width: 860px; margin: 0 auto; padding: 0 20px 60px; }
+/* CONTAINER */
+.container{max-width:820px;margin:0 auto;padding:0 16px 60px;}
 
-/* STEPS */
-.step-card { background: white; border-radius: var(--radius); border: 1px solid var(--border); padding: 28px; margin-bottom: 20px; box-shadow: var(--shadow); }
-.step-header { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; }
-.step-num { width: 36px; height: 36px; background: linear-gradient(135deg, var(--primary), var(--accent)); color: white; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 15px; flex-shrink: 0; }
-.step-title { font-size: 17px; font-weight: 700; color: var(--text); }
-.step-sub { font-size: 13px; color: var(--text-muted); margin-top: 2px; }
+/* STEP CARD */
+.step-card{background:#fff;border-radius:var(--radius);border:1px solid var(--border);padding:24px;margin-bottom:18px;box-shadow:var(--shadow);}
+.step-header{display:flex;align-items:flex-start;gap:12px;margin-bottom:18px;}
+.step-num{width:34px;height:34px;min-width:34px;background:linear-gradient(135deg,var(--primary),var(--accent));color:#fff;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;}
+.step-title{font-size:16px;font-weight:700;color:var(--text);}
+.step-sub{font-size:12px;color:var(--muted);margin-top:2px;}
 
-/* INPUTS */
-.input-row { display: flex; gap: 10px; }
-input[type=text], select, textarea {
-  width: 100%; padding: 12px 16px; border: 1.5px solid var(--border);
-  border-radius: 12px; font-size: 14px; color: var(--text);
-  background: #FAFAFA; outline: none; transition: border 0.2s;
-  font-family: inherit;
-}
-input[type=text]:focus, select:focus, textarea:focus { border-color: var(--primary); background: white; }
-textarea { min-height: 160px; resize: vertical; }
-
-.btn-search { background: linear-gradient(135deg, var(--primary), var(--accent)); color: white; border: none; border-radius: 12px; padding: 12px 22px; font-size: 14px; font-weight: 600; cursor: pointer; white-space: nowrap; transition: opacity 0.2s; }
-.btn-search:hover { opacity: 0.9; }
-.btn-search:disabled { opacity: 0.5; cursor: not-allowed; }
-
-/* SUBTITLE RESULTS */
-.sub-results { margin-top: 16px; display: none; }
-.sub-item { display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; border: 1.5px solid var(--border); border-radius: 12px; margin-bottom: 8px; background: #FAFAFA; cursor: pointer; transition: all 0.2s; gap: 10px; }
-.sub-item:hover { border-color: var(--primary); background: #EEF2FF; }
-.sub-item.selected { border-color: var(--primary); background: #EEF2FF; }
-.sub-name { font-size: 13px; font-weight: 600; color: var(--text); }
-.sub-lang { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
-.btn-dl { background: white; border: 1.5px solid var(--primary); color: var(--primary); border-radius: 8px; padding: 6px 12px; font-size: 12px; font-weight: 600; cursor: pointer; text-decoration: none; }
+/* FORM ELEMENTS */
+input[type=text],select,textarea{width:100%;padding:11px 14px;border:1.5px solid var(--border);border-radius:12px;font-size:14px;color:var(--text);background:#FAFAFA;outline:none;transition:border 0.2s;font-family:inherit;}
+input[type=text]:focus,select:focus,textarea:focus{border-color:var(--primary);background:#fff;}
+textarea{min-height:150px;resize:vertical;}
+label.lbl{display:block;font-size:11px;font-weight:700;color:var(--muted);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.5px;}
 
 /* GRID */
-.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-.grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
-label.field-label { display: block; font-size: 12px; font-weight: 600; color: var(--text-muted); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;}
+
+/* SEARCH ROW */
+.search-row{display:flex;gap:10px;}
+.search-row input{flex:1;}
+.search-row select{width:130px;flex-shrink:0;}
+
+/* BUTTONS */
+.btn-primary{background:linear-gradient(135deg,var(--primary),var(--accent));color:#fff;border:none;border-radius:12px;padding:11px 20px;font-size:14px;font-weight:600;cursor:pointer;transition:opacity 0.2s;white-space:nowrap;}
+.btn-primary:hover{opacity:0.9;}
+.btn-primary:disabled{opacity:0.5;cursor:not-allowed;}
+.btn-outline{background:#fff;border:1.5px solid var(--primary);color:var(--primary);border-radius:8px;padding:7px 14px;font-size:12px;font-weight:600;cursor:pointer;text-decoration:none;display:inline-block;}
+
+/* SUBTITLE RESULTS */
+.sub-results{margin-top:14px;}
+.sub-item{display:flex;align-items:center;justify-content:space-between;padding:12px 14px;border:1.5px solid var(--border);border-radius:12px;margin-bottom:8px;background:#FAFAFA;gap:10px;}
+.sub-name{font-size:13px;font-weight:600;color:var(--text);word-break:break-word;}
+.sub-lang{font-size:11px;color:var(--muted);margin-top:2px;}
 
 /* OR DIVIDER */
-.or-divider { display: flex; align-items: center; gap: 12px; margin: 14px 0; color: var(--text-muted); font-size: 13px; }
-.or-divider::before, .or-divider::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+.or-div{display:flex;align-items:center;gap:10px;margin:16px 0;color:var(--muted);font-size:13px;}
+.or-div::before,.or-div::after{content:'';flex:1;height:1px;background:var(--border);}
 
 /* UPLOAD */
-.upload-area { border: 2px dashed var(--border); border-radius: 12px; padding: 24px; text-align: center; cursor: pointer; transition: all 0.2s; }
-.upload-area:hover { border-color: var(--primary); background: #EEF2FF; }
-.upload-area p { color: var(--text-muted); font-size: 14px; margin-top: 8px; }
-.upload-area strong { color: var(--primary); }
+.upload-box{border:2px dashed var(--border);border-radius:12px;padding:22px;text-align:center;cursor:pointer;transition:all 0.2s;}
+.upload-box:hover{border-color:var(--primary);background:#EEF2FF;}
+.upload-box p{color:var(--muted);font-size:13px;margin-top:8px;}
+.upload-box strong{color:var(--primary);}
 
 /* GENERATE BTN */
-.btn-generate { width: 100%; padding: 16px; background: linear-gradient(135deg, var(--primary), var(--accent)); color: white; border: none; border-radius: 14px; font-size: 17px; font-weight: 700; cursor: pointer; transition: all 0.2s; box-shadow: 0 4px 20px rgba(79,70,229,0.3); display: flex; align-items: center; justify-content: center; gap: 10px; }
-.btn-generate:hover { transform: translateY(-1px); box-shadow: 0 6px 28px rgba(79,70,229,0.4); }
-.btn-generate:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+.btn-generate{width:100%;padding:15px;background:linear-gradient(135deg,var(--primary),var(--accent));color:#fff;border:none;border-radius:14px;font-size:16px;font-weight:700;cursor:pointer;box-shadow:0 4px 20px rgba(79,70,229,0.3);display:flex;align-items:center;justify-content:center;gap:8px;transition:all 0.2s;margin-bottom:18px;}
+.btn-generate:hover{transform:translateY(-1px);box-shadow:0 6px 28px rgba(79,70,229,0.4);}
 
 /* OUTPUT */
-.output-card { background: white; border-radius: var(--radius); border: 1px solid var(--border); padding: 28px; box-shadow: var(--shadow); display: none; margin-top: 20px; }
-.output-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; flex-wrap: gap; gap: 10px; }
-.output-title { font-size: 18px; font-weight: 700; color: var(--text); }
-.btn-copy { background: #EEF2FF; color: var(--primary); border: none; border-radius: 10px; padding: 8px 16px; font-size: 13px; font-weight: 600; cursor: pointer; }
-.output-content { font-size: 14px; line-height: 1.8; color: var(--text); white-space: pre-wrap; background: #FAFAFA; border-radius: 12px; padding: 20px; border: 1px solid var(--border); max-height: 600px; overflow-y: auto; }
+.output-card{background:#fff;border-radius:var(--radius);border:1px solid var(--border);padding:24px;box-shadow:var(--shadow);}
+.output-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:10px;}
+.output-title{font-size:17px;font-weight:700;}
+.btn-copy{background:#EEF2FF;color:var(--primary);border:none;border-radius:10px;padding:9px 18px;font-size:13px;font-weight:700;cursor:pointer;transition:all 0.2s;}
+.btn-copy:hover{background:var(--primary);color:#fff;}
+.output-box{font-size:13px;line-height:1.8;color:var(--text);white-space:pre-wrap;background:#FAFAFA;border-radius:12px;padding:18px;border:1px solid var(--border);max-height:70vh;overflow-y:auto;word-break:break-word;}
 
 /* STATUS */
-.status-msg { text-align: center; padding: 20px; color: var(--text-muted); font-size: 14px; }
-.loader { display: inline-block; width: 20px; height: 20px; border: 3px solid #EEF2FF; border-top-color: var(--primary); border-radius: 50%; animation: spin 0.8s linear infinite; }
-@keyframes spin { to { transform: rotate(360deg); } }
+.status{text-align:center;padding:16px;color:var(--muted);font-size:13px;}
+.hidden{display:none;}
 
 /* FOOTER */
-footer { background: white; border-top: 1px solid var(--border); padding: 24px; text-align: center; color: var(--text-muted); font-size: 13px; }
+footer{background:#fff;border-top:1px solid var(--border);padding:20px;text-align:center;color:var(--muted);font-size:13px;}
 
 /* RESPONSIVE */
-@media (max-width: 600px) {
-  .grid-2, .grid-3 { grid-template-columns: 1fr; }
-  .input-row { flex-direction: column; }
-  .hero { padding: 40px 20px 24px; }
-  .stats { gap: 20px; }
-  nav { padding: 0 16px; }
-  .step-card { padding: 20px; }
+@media(max-width:600px){
+  .g2,.g3{grid-template-columns:1fr;}
+  .search-row{flex-direction:column;}
+  .search-row select{width:100%;}
+  nav{padding:0 14px;}
+  .hero{padding:36px 16px 24px;}
+  .stats{gap:16px;}
+  .step-card{padding:18px;}
+  .output-top{flex-direction:column;align-items:flex-start;}
+  .btn-copy{width:100%;}
 }
 </style>
 </head>
 <body>
 
-<!-- NAV -->
 <nav>
   <a class="logo" href="/">
     <div class="logo-icon">🎬</div>
     <div class="logo-text">
-      Movie Script Generator
-      <span>AI Viral Storytelling Tool</span>
+      Movie Explain Generator
+      <div class="logo-sub">AI Viral Script Tool</div>
     </div>
   </a>
-  <div class="nav-badge">✨ Free AI Tool</div>
+  <div class="badge">✨ 100% Free</div>
 </nav>
 
-<!-- HERO -->
 <div class="hero">
-  <div class="hero-badge">🚀 Powered by Llama AI</div>
+  <div class="hero-badge">🚀 No AI subscription needed</div>
   <h1>Turn Any Movie Into a Viral Script</h1>
-  <p>Upload an SRT file and get a professional storytelling script for YouTube Shorts, TikTok, Instagram Reels & Facebook — in Urdu, Hindi or English.</p>
+  <p>Search for subtitles, choose your settings, and get a ready-to-use master prompt. Paste it into ChatGPT, Claude, or any AI — and get a professional viral script instantly.</p>
   <div class="stats">
-    <div class="stat"><strong>10+</strong><span>Languages</span></div>
+    <div class="stat"><strong>5+</strong><span>Languages</span></div>
     <div class="stat"><strong>5</strong><span>Platforms</span></div>
     <div class="stat"><strong>Free</strong><span>Always</span></div>
   </div>
 </div>
 
-<!-- MAIN -->
 <div class="container">
 
-  <!-- STEP 1: Search SRT -->
+  <!-- STEP 1 -->
   <div class="step-card">
     <div class="step-header">
       <div class="step-num">1</div>
       <div>
-        <div class="step-title">Find Movie Subtitles</div>
-        <div class="step-sub">Search by movie name to find SRT subtitle file</div>
+        <div class="step-title">Find Subtitle File (SRT)</div>
+        <div class="step-sub">Search by movie name or upload your own SRT file</div>
       </div>
     </div>
 
-    <div class="input-row">
-      <input type="text" id="movieSearch" placeholder="Movie name likho... (e.g. Inception, Avengers)" onkeydown="if(event.key==='Enter')searchSubs()">
-      <select id="subLang" style="max-width:130px">
+    <div class="search-row">
+      <input type="text" id="movieSearch" placeholder="Enter movie name... (e.g. Inception, Avengers)" onkeydown="if(event.key==='Enter')searchSubs()">
+      <select id="subLang">
         <option value="EN">English</option>
         <option value="AR">Arabic</option>
         <option value="HI">Hindi</option>
@@ -205,74 +177,75 @@ footer { background: white; border-top: 1px solid var(--border); padding: 24px; 
         <option value="TR">Turkish</option>
         <option value="RU">Russian</option>
       </select>
-      <button class="btn-search" id="searchBtn" onclick="searchSubs()">Search</button>
+      <button class="btn-primary" id="searchBtn" onclick="searchSubs()">Search</button>
     </div>
 
-    <div class="sub-results" id="subResults"></div>
+    <div id="subResults"></div>
 
-    <div class="or-divider">OR</div>
+    <div class="or-div">OR</div>
 
-    <div class="upload-area" onclick="document.getElementById('srtFile').click()">
-      <div style="font-size:32px">📂</div>
-      <p><strong>Click to upload SRT file</strong><br>Khud apna SRT file upload karo</p>
-      <input type="file" id="srtFile" accept=".srt" style="display:none" onchange="handleUpload(event)">
+    <div class="upload-box" onclick="document.getElementById('srtFile').click()">
+      <div style="font-size:30px">📂</div>
+      <p><strong>Click to upload your SRT file</strong><br>Drag & drop or click to browse</p>
+      <input type="file" id="srtFile" accept=".srt,.txt" style="display:none" onchange="handleUpload(event)">
     </div>
     <div id="uploadStatus"></div>
   </div>
 
-  <!-- STEP 2: SRT Content -->
+  <!-- STEP 2 -->
   <div class="step-card">
     <div class="step-header">
       <div class="step-num">2</div>
       <div>
         <div class="step-title">SRT Content</div>
-        <div class="step-sub">Search se auto-fill hoga ya khud paste karo</div>
+        <div class="step-sub">Auto-filled from search or paste manually</div>
       </div>
     </div>
-    <textarea id="srtContent" placeholder="SRT content yahan aayega automatically... ya khud paste karo"></textarea>
+    <textarea id="srtContent" placeholder="SRT content will appear here automatically after download... or paste manually"></textarea>
   </div>
 
-  <!-- STEP 3: Options -->
+  <!-- STEP 3 -->
   <div class="step-card">
     <div class="step-header">
       <div class="step-num">3</div>
       <div>
         <div class="step-title">Script Settings</div>
-        <div class="step-sub">Movie details aur script options chunein</div>
+        <div class="step-sub">Choose your preferences for the generated prompt</div>
       </div>
     </div>
 
-    <div style="margin-bottom:16px">
-      <label class="field-label">Movie Name</label>
-      <input type="text" id="movieName" placeholder="Movie ka naam likho...">
+    <div style="margin-bottom:14px">
+      <label class="lbl">Movie Name</label>
+      <input type="text" id="movieName" placeholder="Enter movie name...">
     </div>
 
-    <div class="grid-2" style="margin-bottom:16px">
+    <div class="g2" style="margin-bottom:14px">
       <div>
-        <label class="field-label">Script Language</label>
+        <label class="lbl">Script Language</label>
         <select id="language">
-          <option value="Urdu">🇵🇰 Urdu</option>
-          <option value="Hindi">🇮🇳 Hindi</option>
-          <option value="Hinglish">🔀 Hinglish</option>
           <option value="English">🇬🇧 English</option>
+          <option value="Roman Urdu">🇵🇰 Roman Urdu</option>
+          <option value="Roman Hindi">🇮🇳 Roman Hindi</option>
+          <option value="Urdu">اردو Urdu</option>
+          <option value="Hindi">हिंदी Hindi</option>
           <option value="Arabic">🇸🇦 Arabic</option>
         </select>
       </div>
       <div>
-        <label class="field-label">Platform</label>
+        <label class="lbl">Platform</label>
         <select id="platform">
           <option value="YouTube Shorts">▶️ YouTube Shorts</option>
           <option value="TikTok">🎵 TikTok</option>
           <option value="Instagram Reels">📸 Instagram Reels</option>
           <option value="Facebook Reels">👥 Facebook Reels</option>
-          <option value="YouTube Long Form">🎬 YouTube Long</option>
+          <option value="YouTube Long Form">🎬 YouTube Long Form</option>
         </select>
       </div>
     </div>
 
-    <div class="grid-2" style="margin-bottom:16px">
+    <div class="g2" style="margin-bottom:14px">
       <div>
-        <label class="field-label">Content Style</label>
+        <label class="lbl">Content Style</label>
         <select id="style">
           <option value="Thriller">🔥 Thriller</option>
           <option value="Emotional">💔 Emotional</option>
@@ -287,7 +260,7 @@ footer { background: white; border-top: 1px solid var(--border); padding: 24px; 
         </select>
       </div>
       <div>
-        <label class="field-label">Video Duration</label>
+        <label class="lbl">Video Duration</label>
         <select id="duration">
           <option value="30 Seconds">⚡ 30 Seconds</option>
           <option value="60 Seconds" selected>⏱ 60 Seconds</option>
@@ -301,29 +274,70 @@ footer { background: white; border-top: 1px solid var(--border); padding: 24px; 
   </div>
 
   <!-- GENERATE -->
-  <button class="btn-generate" id="genBtn" onclick="generate()">
-    <span>✨</span> Generate Viral Script
+  <button class="btn-generate" onclick="generatePrompt()">
+    ✨ Generate Master Prompt
   </button>
 
   <!-- OUTPUT -->
-  <div class="output-card" id="outputCard">
-    <div class="output-header">
-      <div class="output-title">🎬 Your Viral Script</div>
-      <button class="btn-copy" onclick="copyScript()">📋 Copy Script</button>
+  <div class="output-card hidden" id="outputCard">
+    <div class="output-top">
+      <div class="output-title">🎬 Your Master Prompt</div>
+      <button class="btn-copy" id="copyBtn" onclick="copyPrompt()">📋 Copy Prompt</button>
     </div>
-    <div class="output-content" id="outputContent"></div>
+    <p style="font-size:12px;color:var(--muted);margin-bottom:12px">Paste this into ChatGPT, Claude, Gemini or any AI to get your viral script instantly.</p>
+    <div class="output-box" id="outputBox"></div>
   </div>
 
 </div>
 
-<!-- FOOTER -->
 <footer>
-  <p>🎬 Movie Script Generator &nbsp;|&nbsp; AI-Powered Viral Storytelling &nbsp;|&nbsp; Free Forever</p>
+  <p>🎬 Movie Explain Generator &nbsp;|&nbsp; AI Viral Storytelling Tool &nbsp;|&nbsp; Free Forever</p>
   <p style="margin-top:6px">Made for YouTube, TikTok, Instagram & Facebook Creators</p>
 </footer>
 
 <script>
-let srtText = '';
+// LANGUAGE SPECIFIC INSTRUCTIONS
+const langInstructions = {
+  'English': {
+    rule: 'Write the ENTIRE script in English only. Use natural, engaging American/British English. No other language.',
+    hookStyle: 'Use powerful English hooks like: "What he discovered next changed everything...", "Nobody expected what happened next..."',
+    example: 'His hands were trembling. [Pause] And then he opened that door — the one that would change his life forever. [Shock]'
+  },
+  'Roman Urdu': {
+    rule: 'Write the ENTIRE script in Roman Urdu (Urdu words written in English/Roman letters). Do NOT use Urdu script. Do NOT use English sentences — only Roman Urdu.',
+    hookStyle: 'Use Roman Urdu hooks like: "Lekin asli twist abhi baqi tha...", "Aur phir kuch aisa hua jisne sab badal diya..."',
+    example: 'Uske haath kaanp rahe the. [Pause] Aur phir usne woh darwaza khola — jiske baad uski zindagi kabhi pehle jaisi nahi rahi. [Shock]'
+  },
+  'Roman Hindi': {
+    rule: 'Write the ENTIRE script in Roman Hindi (Hindi words written in English/Roman letters). Do NOT use Devanagari script. Do NOT use English sentences — only Roman Hindi.',
+    hookStyle: 'Use Roman Hindi hooks like: "Lekin asli rahasya abhi baaki tha...", "Aur tab kuch aisa hua jo kisine socha bhi nahi tha..."',
+    example: 'Uske haath kaamp rahe the. [Pause] Aur phir usne woh darwaza khola — jiske baad uski zindagi hamesha ke liye badal gayi. [Shock]'
+  },
+  'Urdu': {
+    rule: 'Write the ENTIRE script in Urdu script (اردو). Do NOT use Roman Urdu or English. Only proper nouns may stay in original form.',
+    hookStyle: 'Use Urdu hooks like: "لیکن اصل موڑ ابھی باقی تھا...", "اور پھر کچھ ایسا ہوا جس نے سب کچھ بدل دیا..."',
+    example: 'اس کے ہاتھ کانپ رہے تھے۔ [وقفہ] اور پھر اس نے وہ دروازہ کھولا — جس کے بعد اس کی زندگی ہمیشہ کے لیے بدل گئی۔ [صدمہ]'
+  },
+  'Hindi': {
+    rule: 'Write the ENTIRE script in Hindi (हिंदी Devanagari script). Do NOT use Roman Hindi or English. Only proper nouns may stay in original form.',
+    hookStyle: 'Use Hindi hooks like: "लेकिन असली राज़ अभी बाकी था...", "और तब कुछ ऐसा हुआ जिसने सब कुछ बदल दिया..."',
+    example: 'उसके हाथ काँप रहे थे। [रुकावट] और फिर उसने वो दरवाज़ा खोला — जिसके बाद उसकी ज़िंदगी हमेशा के लिए बदल गई। [सदमा]'
+  },
+  'Arabic': {
+    rule: 'Write the ENTIRE script in Arabic (العربية). Do NOT use any other language. Only proper nouns may stay in original form.',
+    hookStyle: 'Use Arabic hooks like: "لكن الصدمة الحقيقية لم تأتِ بعد...", "وفجأة حدث شيء غيّر كل شيء..."',
+    example: 'كانت يداه ترتجفان. [توقف] ثم فتح ذلك الباب — الذي غيّر حياته إلى الأبد. [صدمة]'
+  }
+};
+
+const wordCounts = {
+  '30 Seconds': '~75 words',
+  '60 Seconds': '~150 words',
+  '90 Seconds': '~225 words',
+  '3 Minutes': '~450 words',
+  '5 Minutes': '~750 words',
+  '10 Minutes': '~1500 words'
+};
 
 // SEARCH SUBTITLES
 async function searchSubs() {
@@ -336,59 +350,36 @@ async function searchSubs() {
   btn.textContent = 'Searching...';
 
   const res = document.getElementById('subResults');
-  res.style.display = 'block';
-  res.innerHTML = '<div class="status-msg"><span class="loader"></span> Searching subtitles...</div>';
+  res.innerHTML = '<div class="status">⏳ Searching subtitles...</div>';
 
   try {
     const r = await fetch(`/api/subtitle?movie=${encodeURIComponent(movie)}&lang=${lang}`);
     const data = await r.json();
 
     if (!data.results || data.results.length === 0) {
-      res.innerHTML = '<div class="status-msg">No subtitles found. Try uploading manually.</div>';
+      res.innerHTML = '<div class="status">No subtitles found. Try uploading manually.</div>';
       return;
     }
 
-    // Auto fill movie name
     document.getElementById('movieName').value = movie;
 
-    let html = `<div style="font-size:13px;color:var(--text-muted);margin-bottom:10px">${data.results.length} subtitles found — select one to use:</div>`;
-    data.results.slice(0, 8).forEach((s, i) => {
-      html += `<div class="sub-item" onclick="selectSub(this, '${s.url}', '${s.name.replace(/'/g,"\\'")}')">
-        <div>
+    let html = `<div style="font-size:12px;color:var(--muted);margin:12px 0 10px">${data.results.length} subtitles found — download one and paste the content above:</div>`;
+    data.results.slice(0, 10).forEach((s, i) => {
+      html += `<div class="sub-item">
+        <div style="flex:1;min-width:0">
           <div class="sub-name">${s.name || 'Subtitle ' + (i+1)}</div>
           <div class="sub-lang">${s.language}</div>
         </div>
-        <a class="btn-dl" href="${s.url}" target="_blank" onclick="event.stopPropagation()">⬇ Download</a>
+        <a class="btn-outline" href="${s.url}" target="_blank">⬇ Download</a>
       </div>`;
     });
     res.innerHTML = html;
   } catch(e) {
-    res.innerHTML = `<div class="status-msg">Error: ${e.message}</div>`;
+    res.innerHTML = `<div class="status">Error: ${e.message}</div>`;
   }
 
   btn.disabled = false;
   btn.textContent = 'Search';
-}
-
-// SELECT SUBTITLE
-async function selectSub(el, url, name) {
-  document.querySelectorAll('.sub-item').forEach(i => i.classList.remove('selected'));
-  el.classList.add('selected');
-  document.getElementById('srtContent').value = 'Downloading SRT...';
-
-  try {
-    const r = await fetch(`/api/subtitle?download=${encodeURIComponent(url)}`);
-    const text = await r.text();
-    if (text && text.includes('-->')) {
-      document.getElementById('srtContent').value = text;
-      srtText = text;
-    } else {
-      document.getElementById('srtContent').value = '';
-      alert('SRT auto-load nahi ho saka. Please manually download karein aur paste karein.');
-    }
-  } catch(e) {
-    document.getElementById('srtContent').value = '';
-  }
 }
 
 // UPLOAD SRT
@@ -397,64 +388,137 @@ function handleUpload(event) {
   if (!file) return;
   const reader = new FileReader();
   reader.onload = e => {
-    srtText = e.target.result;
-    document.getElementById('srtContent').value = srtText;
-    document.getElementById('uploadStatus').innerHTML = `<p style="color:var(--success);font-size:13px;margin-top:8px">✅ ${file.name} uploaded!</p>`;
+    document.getElementById('srtContent').value = e.target.result;
+    document.getElementById('uploadStatus').innerHTML = `<p style="color:var(--success);font-size:13px;margin-top:8px">✅ ${file.name} uploaded successfully!</p>`;
     if (!document.getElementById('movieName').value) {
-      document.getElementById('movieName').value = file.name.replace('.srt','').replace(/_/g,' ');
+      document.getElementById('movieName').value = file.name.replace(/\.srt$/i,'').replace(/[_\.]/g,' ').trim();
     }
   };
   reader.readAsText(file);
 }
 
-// GENERATE SCRIPT
-async function generate() {
-  const srt = document.getElementById('srtContent').value.trim() || srtText;
+// GENERATE MASTER PROMPT
+function generatePrompt() {
+  const srt = document.getElementById('srtContent').value.trim();
   const movie = document.getElementById('movieName').value.trim();
+  const language = document.getElementById('language').value;
+  const platform = document.getElementById('platform').value;
+  const style = document.getElementById('style').value;
+  const duration = document.getElementById('duration').value;
 
-  if (!movie) { alert('Movie ka naam likho!'); return; }
-  if (!srt) { alert('SRT file upload karo ya content paste karo!'); return; }
+  if (!movie) { alert('Please enter the movie name!'); return; }
+  if (!srt) { alert('Please upload or paste the SRT content!'); return; }
 
-  const btn = document.getElementById('genBtn');
-  btn.disabled = true;
-  btn.innerHTML = '<span class="loader"></span> Generating Script...';
+  const lang = langInstructions[language];
+  const wordCount = wordCounts[duration];
 
-  const output = document.getElementById('outputCard');
-  output.style.display = 'block';
-  document.getElementById('outputContent').textContent = '⏳ AI script generate kar raha hai... Thoda wait karo...';
-  output.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  const prompt = `You are an Elite Movie Storytelling Agent, Viral Content Strategist, and Professional Script Writer. Your scripts have generated millions of views on YouTube, TikTok, and Instagram Reels.
 
-  try {
-    const r = await fetch('/api/generate', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        movie,
-        srt: srt.slice(0, 10000),
-        language: document.getElementById('language').value,
-        platform: document.getElementById('platform').value,
-        style: document.getElementById('style').value,
-        duration: document.getElementById('duration').value
-      })
-    });
-    const data = await r.json();
-    if (data.error) throw new Error(data.error);
-    document.getElementById('outputContent').textContent = data.script;
-  } catch(e) {
-    document.getElementById('outputContent').textContent = 'Error: ' + e.message;
-  }
+Your task is to analyze the SRT subtitle file below and immediately generate a COMPLETE viral storytelling script package. Do NOT ask any questions. Generate everything at once.
 
-  btn.disabled = false;
-  btn.innerHTML = '<span>✨</span> Generate Viral Script';
+━━━━━━━━━━━━━━━━━━━━━━━━
+CONTENT DETAILS
+━━━━━━━━━━━━━━━━━━━━━━━━
+Movie Name: ${movie}
+Script Language: ${language}
+Platform: ${platform}
+Content Style: ${style}
+Video Duration: ${duration} (${wordCount})
+
+━━━━━━━━━━━━━━━━━━━━━━━━
+LANGUAGE RULE — MOST IMPORTANT
+━━━━━━━━━━━━━━━━━━━━━━━━
+${lang.rule}
+
+━━━━━━━━━━━━━━━━━━━━━━━━
+SRT SUBTITLE FILE
+━━━━━━━━━━━━━━━━━━━━━━━━
+${srt.slice(0, 12000)}
+
+━━━━━━━━━━━━━━━━━━━━━━━━
+CRITICAL STORYTELLING RULES
+━━━━━━━━━━━━━━━━━━━━━━━━
+1. Write like a HUMAN STORYTELLER — NOT a reviewer, analyst or summarizer
+2. NEVER write: "In this movie...", "The protagonist...", "This film shows..."
+3. Write in dramatic, emotional, first/third person storytelling voice
+4. Every 2-3 lines MUST have a curiosity hook:
+   ${lang.hookStyle}
+5. Create EMOTION — make the audience feel fear, excitement, shock, curiosity
+6. Use voice direction markers: [Pause] [Whisper] [Shock] [Suspense] [Fast] [Slow]
+7. Script MUST be exactly ${wordCount} long
+
+GOOD EXAMPLE IN ${language}:
+"${lang.example}"
+
+BAD EXAMPLE (never do this):
+"The protagonist faces many challenges and the story revolves around the theme of dreams."
+
+━━━━━━━━━━━━━━━━━━━━━━━━
+MICRO-CLIP RULES
+━━━━━━━━━━━━━━━━━━━━━━━━
+- Break script into multiple 2-5 second micro-clips
+- Every voiceover section must have its own clip with EXACT timestamp from SRT
+- Never recommend one long clip
+
+━━━━━━━━━━━━━━━━━━━━━━━━
+GENERATE ALL SECTIONS BELOW — DO NOT SKIP ANY
+━━━━━━━━━━━━━━━━━━━━━━━━
+
+## 🎬 VIRAL CONCEPT
+Name: [Creative concept name]
+Angle: [The specific viral angle and why it works for ${platform}]
+Why It Will Go Viral: [Psychological reason]
+Emotional Score: [X/10]
+Viral Potential: [X/10]
+
+## ⚡ HOOK — First 3 Seconds
+[Single most powerful line to STOP the scroll]
+On-Screen Text: [Bold text overlay]
+
+## 📝 COMPLETE VOICEOVER SCRIPT
+[Full ${wordCount} script in ${language}]
+[Human storyteller voice with emotion markers]
+[Curiosity hooks every 2-3 lines]
+
+## 🎞️ MICRO-CLIP EDITING PLAN
+For EVERY voiceover section:
+
+**Clip [N]**
+⏱ Timestamp: [EXACT from SRT e.g. 00:05:12 – 00:05:15]
+⏳ Duration: [2-5 sec]
+🎬 Scene: [What is happening at this timestamp]
+🎤 Voiceover: [Lines spoken during this clip]
+🔍 Zoom: [In/Out/Static]
+✂️ Transition: [Cut/Fade/Smash cut]
+
+## 📱 SEO PACKAGE — Write in English Only
+Title: [Click-worthy, SEO title — max 60 chars]
+Description: [200 word SEO description with keywords]
+Tags: [30 tags separated by commas]
+Hashtags: [25 hashtags]
+Thumbnail Text: [3-5 bold words]
+CTA: [Strong end-screen call to action]
+Best Upload Time: [Optimal time for ${platform}]`;
+
+  document.getElementById('outputBox').textContent = prompt;
+  const card = document.getElementById('outputCard');
+  card.classList.remove('hidden');
+  card.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
 // COPY
-function copyScript() {
-  const text = document.getElementById('outputContent').textContent;
+function copyPrompt() {
+  const text = document.getElementById('outputBox').textContent;
   navigator.clipboard.writeText(text).then(() => {
-    const btn = document.querySelector('.btn-copy');
+    const btn = document.getElementById('copyBtn');
     btn.textContent = '✅ Copied!';
-    setTimeout(() => btn.textContent = '📋 Copy Script', 2000);
+    btn.style.background = 'var(--primary)';
+    btn.style.color = '#fff';
+    setTimeout(() => {
+      btn.textContent = '📋 Copy Prompt';
+      btn.style.background = '';
+      btn.style.color = '';
+    }, 2500);
   });
 }
 </script>
