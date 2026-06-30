@@ -356,11 +356,13 @@ footer a{color:var(--primary);text-decoration:none;}
     <div class="step-header">
       <div class="step-num">2</div>
       <div>
-        <div class="step-title">SRT Content</div>
-        <div class="step-sub">Auto-filled after download, or paste manually</div>
+        <div class="step-title">Download Your SRT File</div>
+        <div class="step-sub">Download the SRT from Step 1 — you'll attach it directly to ChatGPT/Claude, no need to paste it here</div>
       </div>
     </div>
-    <textarea id="srtContent" placeholder="SRT subtitle content will appear here after download... or paste manually"></textarea>
+    <p style="font-size:13px;color:var(--muted);line-height:1.7;background:#FAFAFA;border:1px solid var(--border);border-radius:12px;padding:14px">
+      💡 After generating your prompt below, open <strong>ChatGPT</strong> or <strong>Claude</strong>, attach your downloaded SRT file using the file upload button, paste the prompt, and send both together.
+    </p>
   </div>
 
   <!-- STEP 3 -->
@@ -399,7 +401,7 @@ footer a{color:var(--primary);text-decoration:none;}
         </select>
       </div>
     </div>
-    <div class="g2">
+    <div class="g2" style="margin-bottom:14px">
       <div>
         <label class="lbl">Content Style</label>
         <select id="style">
@@ -415,16 +417,15 @@ footer a{color:var(--primary);text-decoration:none;}
           <option value="AI Decide Best">🤖 AI Decide Best</option>
         </select>
       </div>
-      <div>
-        <label class="lbl">Video Duration</label>
-        <select id="duration">
-          <option value="30 Seconds">⚡ 30 Seconds</option>
-          <option value="60 Seconds" selected>⏱ 60 Seconds</option>
-          <option value="90 Seconds">🕐 90 Seconds</option>
-          <option value="3 Minutes">📽 3 Minutes</option>
-          <option value="5 Minutes">🎞 5 Minutes</option>
-          <option value="10 Minutes">🎬 10 Minutes</option>
-        </select>
+      <div></div>
+    </div>
+
+    <div>
+      <label class="lbl">Video Duration — <span id="durationValue" style="color:var(--primary);font-weight:800">1 Minute</span></label>
+      <input type="range" id="durationSlider" min="1" max="25" value="1" step="1" oninput="updateDuration(this.value)" style="width:100%;height:8px;border-radius:6px;accent-color:#4F46E5;cursor:pointer;margin-top:8px">
+      <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-top:4px">
+        <span>1 min</span>
+        <span>25 min</span>
       </div>
     </div>
   </div>
@@ -569,34 +570,33 @@ async function searchSubs() {
 function handleUpload(event) {
   const file = event.target.files[0];
   if (!file) return;
-  const reader = new FileReader();
-  reader.onload = e => {
-    document.getElementById('srtContent').value = e.target.result;
-    document.getElementById('uploadStatus').innerHTML = `<p style="color:var(--success);font-size:13px;margin-top:8px">✅ ${file.name} uploaded!</p>`;
-    if (!document.getElementById('movieName').value) {
-      document.getElementById('movieName').value = file.name.replace(/\.srt$/i,'').replace(/[_\.]/g,' ').trim();
-    }
-  };
-  reader.readAsText(file);
+  document.getElementById('uploadStatus').innerHTML = `<p style="color:var(--success);font-size:13px;margin-top:8px">✅ ${file.name} ready — remember to attach this file in ChatGPT/Claude along with the prompt!</p>`;
+  if (!document.getElementById('movieName').value) {
+    document.getElementById('movieName').value = file.name.replace(/\.srt$/i,'').replace(/[_\.]/g,' ').trim();
+  }
+}
+
+function updateDuration(val) {
+  const minutes = parseInt(val);
+  const label = minutes === 1 ? '1 Minute' : `${minutes} Minutes`;
+  document.getElementById('durationValue').textContent = label;
 }
 
 function generatePrompt() {
-  const srt = document.getElementById('srtContent').value.trim();
   const movie = document.getElementById('movieName').value.trim();
   const language = document.getElementById('language').value;
   const platform = document.getElementById('platform').value;
   const style = document.getElementById('style').value;
-  const duration = document.getElementById('duration').value;
+  const durationMin = parseInt(document.getElementById('durationSlider').value);
+  const duration = durationMin === 1 ? '1 Minute' : `${durationMin} Minutes`;
 
   if (!movie) { alert('Please enter the movie name!'); return; }
-  if (!srt) { alert('Please upload or paste the SRT content!'); return; }
 
   const lang = langInstructions[language];
 
-
   const prompt = `You are an Elite Movie Storytelling Agent, Viral Content Strategist, and Professional Script Writer. Your scripts have generated millions of views on YouTube, TikTok, and Instagram Reels.
 
-Analyze the SRT subtitle file below and immediately generate a COMPLETE viral storytelling script package. Do NOT ask any questions. Start generating immediately.
+I have ATTACHED the movie's SRT subtitle file to this message (or pasted it directly below if no attachment was possible). This SRT file contains the full dialogue and exact timestamps of the movie. Carefully read and analyze the ENTIRE attached/pasted SRT file before writing anything. Do NOT ask any questions, do NOT ask me to paste the file again, and do NOT wait for confirmation. Start generating immediately using the attached file as your only source of scene content and timestamps.
 
 ━━━━━━━━━━━━━━━━━━━━━━━━
 CONTENT DETAILS
@@ -613,21 +613,26 @@ LANGUAGE RULE — MOST IMPORTANT
 ${lang.rule}
 
 ━━━━━━━━━━━━━━━━━━━━━━━━
-SRT SUBTITLE FILE
+YOUR TASK
 ━━━━━━━━━━━━━━━━━━━━━━━━
-${srt.slice(0,12000)}
+1. Read the entire attached SRT file from start to finish
+2. Identify the most viral, emotional, shocking or suspenseful moments in the movie based on the "${style}" style
+3. Select ONLY the best scenes that together fit naturally within ${duration} of spoken narration — ignore all weaker or filler scenes
+4. Use the EXACT timestamps from the SRT file for every clip you reference — never invent or guess timestamps
+5. Write a complete, ready-to-film viral script package using the format below
 
 ━━━━━━━━━━━━━━━━━━━━━━━━
 CRITICAL STORYTELLING RULES
 ━━━━━━━━━━━━━━━━━━━━━━━━
 1. Write like a HUMAN STORYTELLER — NOT a reviewer, analyst or summarizer
 2. NEVER write: "In this movie...", "The protagonist...", "This film shows..."
-3. Write in dramatic, emotional, active storytelling voice
-4. Every 2-3 lines MUST have a curiosity hook:
+3. Write in dramatic, emotional, active storytelling voice — as if telling this story live to a captivated audience
+4. Every 2-3 lines MUST have a curiosity hook to keep the viewer watching:
    ${lang.hookStyle}
-5. Make the audience FEEL fear, excitement, shock, curiosity, sadness
-6. Use voice markers: [Pause] [Whisper] [Shock] [Suspense] [Fast] [Slow]
-7. Analyze the entire SRT and automatically select the best viral scenes that fit naturally within ${duration} when read aloud. Do NOT use fixed word count. Choose scenes based on emotional impact, shock value and viral potential.
+5. Make the audience FEEL fear, excitement, shock, curiosity, sadness — do not just describe events
+6. Use voice direction markers throughout: [Pause] [Whisper] [Shock] [Suspense] [Fast] [Slow]
+7. The script's natural spoken length (at normal narration pace) must match ${duration} — not shorter, not longer
+8. Do not summarize the plot — TELL the story scene by scene like a gripping narrator
 
 GOOD EXAMPLE IN ${language}:
 "${lang.example}"
@@ -638,12 +643,12 @@ BAD EXAMPLE (never do this):
 ━━━━━━━━━━━━━━━━━━━━━━━━
 MICRO-CLIP RULES
 ━━━━━━━━━━━━━━━━━━━━━━━━
-- Break the script into multiple 2-5 second micro-clips
-- Each section must have its own EXACT timestamp from the SRT file
-- Never recommend one long clip
+- Break the script into multiple 2-5 second micro-clips, never one long clip
+- Every voiceover section must be paired with its own exact timestamp from the attached SRT
+- The number of clips should be enough to cover the full ${duration} runtime with constant visual variety
 
 ━━━━━━━━━━━━━━━━━━━━━━━━
-GENERATE ALL SECTIONS — DO NOT SKIP ANY
+GENERATE ALL SECTIONS BELOW — DO NOT SKIP ANY — DO NOT STOP EARLY
 ━━━━━━━━━━━━━━━━━━━━━━━━
 
 ## 🎬 VIRAL CONCEPT
@@ -658,38 +663,38 @@ Viral Potential: [X/10]
 On-Screen Text: [Bold 3-5 word text overlay]
 
 ## 📝 COMPLETE VOICEOVER SCRIPT
-[Full script in ${language}, length matching ${duration} when read aloud]
-[Human storyteller voice — emotional and dramatic]
-[Voice markers and curiosity hooks throughout]
+[Full script in ${language}, natural spoken length matching ${duration}]
+[Human storyteller voice — emotional and dramatic throughout]
+[Voice markers and curiosity hooks placed naturally]
 
 ## 🎞️ MICRO-CLIP EDITING PLAN
 For EVERY voiceover section provide:
 **Clip [N]**
-⏱ Timestamp: [EXACT from SRT]
+⏱ Timestamp: [EXACT from the attached SRT file]
 ⏳ Duration: [2-5 sec]
-🎬 Scene: [What is happening]
-🎤 Voiceover: [Lines for this clip]
+🎬 Scene: [What is happening at this timestamp]
+🎤 Voiceover: [Matching lines for this clip]
 🔍 Zoom: [In/Out/Static]
 ✂️ Transition: [Cut/Fade/Smash cut]
 
 ## 📱 SEO PACKAGE — Always in English
-Title: [SEO optimized — max 60 chars]
-Description: [200 word SEO description]
-Tags: [30 tags, comma separated]
-Hashtags: [25 hashtags]
-Thumbnail Text: [3-5 bold words]
+Title: [SEO optimized — max 60 characters]
+Description: [200 word SEO description with natural keywords]
+Tags: [30 relevant tags, comma separated]
+Hashtags: [25 relevant hashtags]
+Thumbnail Text: [3-5 bold attention-grabbing words]
 CTA: [Strong end-screen call to action]
-Best Upload Time: [Optimal time for ${platform}]
+Best Upload Time: [Optimal posting time for ${platform}]
 
 ━━━━━━━━━━━━━━━━━━━━━━━━
 DELIVERY INSTRUCTIONS
 ━━━━━━━━━━━━━━━━━━━━━━━━
-This is a large deliverable. Deliver in multiple parts:
+This is a large deliverable that may exceed one response. If so, deliver it in multiple parts automatically:
 - Part 1: Viral Concept + Hook + Full Voiceover Script
-- Part 2: Complete Micro-Clip Editing Plan with all timestamps
+- Part 2: Complete Micro-Clip Editing Plan with all exact timestamps
 - Part 3: Full SEO Package
 
-Start Part 1 immediately without asking any questions. After each part, write "Continuing to Part [N]..." and continue automatically. Do NOT wait for confirmation. Complete ALL parts fully.`;
+Start Part 1 immediately. Do not ask any clarifying questions at any point. After each part ends, write "Continuing to Part [N]..." and continue automatically without waiting for my confirmation. Complete ALL parts fully before finishing.`;
 
   document.getElementById('outputBox').textContent = prompt;
   const card = document.getElementById('outputCard');
