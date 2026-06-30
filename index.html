@@ -441,7 +441,7 @@ footer a{color:var(--primary);text-decoration:none;}
       <div class="output-title">🎬 Your Master Prompt</div>
       <button class="btn-copy" id="copyBtn" onclick="copyPrompt()">📋 Copy Prompt</button>
     </div>
-    <p style="font-size:12px;color:var(--muted);margin-bottom:12px">✅ Paste this into <strong>ChatGPT</strong>, <strong>Claude</strong> or any AI chatbot to get your complete viral script.</p>
+    <p style="font-size:12px;color:var(--muted);margin-bottom:12px">✅ For best results, attach your SRT file and paste this prompt into <strong>Claude.ai</strong> (recommended). Some other AI tools may decline detailed scene-by-scene requests.</p>
     <div class="output-box" id="outputBox"></div>
   </div>
 
@@ -594,9 +594,11 @@ function generatePrompt() {
 
   const lang = langInstructions[language];
 
-  const prompt = `You are an Elite Movie Commentary Creator, Viral Content Strategist, and Professional Script Writer. You create original, commentary-style storytelling content that discusses and reacts to movies for YouTube, TikTok, and Instagram Reels — similar to popular "movie recap" and "movie explained" creators.
+  const prompt = `You are an Elite Movie Storytelling Agent, Viral Content Strategist, Retention Expert, Social Media Growth Expert, Human Psychology Expert, Movie Researcher, and Professional Storytelling Script Writer.
 
-I have ATTACHED the movie's SRT subtitle file to this message. Use it only as a reference to identify which moments in the film are the most emotional, suspenseful or talked-about, and to find approximate timestamps for editing reference. Do NOT ask any questions, do NOT ask me to paste the file again, and do NOT wait for confirmation — start generating immediately.
+Your mission is to transform this movie into highly engaging short-form storytelling content optimized for ${platform}.
+
+I have ATTACHED the movie's SRT subtitle file to this message. Analyze the complete subtitle file. Do NOT ask any questions, do NOT ask me to paste the file again, and do NOT wait for confirmation — start generating immediately using the format below.
 
 ━━━━━━━━━━━━━━━━━━━━━━━━
 CONTENT DETAILS
@@ -604,8 +606,8 @@ CONTENT DETAILS
 Movie Name: ${movie}
 Script Language: ${language}
 Platform: ${platform}
-Content Style: ${style}
-Target Video Duration: ${duration}
+Content Type: ${style}
+Desired Length: ${duration}
 
 ━━━━━━━━━━━━━━━━━━━━━━━━
 LANGUAGE RULE — MOST IMPORTANT
@@ -613,87 +615,128 @@ LANGUAGE RULE — MOST IMPORTANT
 ${lang.rule}
 
 ━━━━━━━━━━━━━━━━━━━━━━━━
-YOUR TASK
+FULL SRT ANALYSIS
 ━━━━━━━━━━━━━━━━━━━━━━━━
-1. Review the attached SRT file to understand the film's key moments and overall structure
-2. Identify which moments are the most emotional, shocking or suspenseful, fitting the "${style}" angle
-3. Select the moments that together support a narration of approximately ${duration} when spoken aloud
-4. Reference approximate timestamps near those moments purely as editing guidance for the creator — these are reference points for finding footage, not a transcript
-5. Write an ORIGINAL commentary-style narration in your own words that discusses, reacts to, and builds suspense around these moments — do not reproduce or closely paraphrase the film's dialogue or shot-by-shot sequence
-6. Produce a complete, ready-to-film content package using the format below
+Analyze the entire attached subtitle file. Detect:
+- Emotional Peaks
+- Shock Moments
+- Suspense Moments
+- Plot Twists
+- Character Turning Points
+- Fear Moments
+- Revenge Moments
+- Life Lesson Moments
+- Mystery Moments
+- Viral Dialogue Moments
+
+Understand the story progression, character arcs, emotional arcs, plot structure, and audience reaction potential. Then select the best storytelling angle that fits the "${style}" content type and ${duration} target length.
 
 ━━━━━━━━━━━━━━━━━━━━━━━━
-CRITICAL STORYTELLING RULES
+🚨 MOST IMPORTANT RULE
 ━━━━━━━━━━━━━━━━━━━━━━━━
-1. Write like a HUMAN COMMENTATOR/STORYTELLER reacting to and building suspense around the film — NOT a reviewer reciting plot, and NOT a transcript of the film's dialogue
-2. NEVER write generic lines like: "In this movie...", "The protagonist...", "This film shows..."
-3. Write in a dramatic, emotional, engaging narration voice — as if hyping up an audience about what happens, without quoting the film's actual lines
-4. Every 2-3 lines MUST have a curiosity hook to keep the viewer watching:
-   ${lang.hookStyle}
-5. Make the audience FEEL fear, excitement, shock, curiosity, sadness through your own original phrasing
-6. Use voice direction markers throughout: [Pause] [Whisper] [Shock] [Suspense] [Fast] [Slow]
-7. The narration's natural spoken length (at normal pace) must match ${duration} — not shorter, not longer
-8. This must be an original commentary/narration in your own words — never copy or closely mirror lines from the film itself
+NEVER write:
+- Movie analysis
+- Movie review
+- Critic explanation
+- Documentary narration
+- Plot summary
 
-GOOD EXAMPLE IN ${language}:
+The output MUST feel like a human storyteller is telling an incredible story.
+
+Example:
+BAD: "The king became angry."
+GOOD (in ${language}):
 "${lang.example}"
 
-BAD EXAMPLE (never do this):
-"The protagonist faces many challenges and the story revolves around the theme of dreams."
+━━━━━━━━━━━━━━━━━━━━━━━━
+RETENTION RULES
+━━━━━━━━━━━━━━━━━━━━━━━━
+Every few lines create curiosity. Use phrases like:
+${lang.hookStyle}
+
+The audience should constantly want to know what happens next.
 
 ━━━━━━━━━━━━━━━━━━━━━━━━
-MICRO-CLIP EDITING REFERENCE
+EMOTIONAL STORYTELLING RULES
 ━━━━━━━━━━━━━━━━━━━━━━━━
-- Break the narration into multiple 2-5 second micro-clip references, never one long clip
-- Pair each narration section with an approximate timestamp range from the attached SRT as a guide for the editor to locate relevant footage
-- Provide enough clip references to cover the full ${duration} runtime with constant visual variety
+Make viewers FEEL: Fear, Hope, Sadness, Excitement, Curiosity, Shock, Anger, Suspense.
+Do not explain emotions. Create emotions through storytelling.
 
 ━━━━━━━━━━━━━━━━━━━━━━━━
-GENERATE ALL SECTIONS BELOW — DO NOT SKIP ANY — DO NOT STOP EARLY
+MICRO-CLIP EDITING STRATEGY
+━━━━━━━━━━━━━━━━━━━━━━━━
+CRITICAL RULE: Never recommend one long movie clip. Never output one continuous timestamp range.
+
+Instead, break the storytelling script into multiple micro-scenes. For every section of the voiceover, recommend a short supporting clip, generally 2-5 seconds. The final video should be built from many short clips taken from different moments throughout the movie.
+
+Example:
+Voiceover Section 1
+Timestamp: 00:05:12 – 00:05:15
+Scene: Character discovers something strange
+
+Voiceover Section 2
+Timestamp: 00:18:22 – 00:18:26
+Scene: Character becomes suspicious
+
+Continue until the entire voiceover has matching micro-scenes covering the full ${duration} runtime.
+
+For EVERY voiceover section provide: Timestamp, Duration, Scene Description, Voiceover Lines, Suggested Zoom Effect, Suggested Text Overlay, Suggested Transition.
+
+━━━━━━━━━━━━━━━━━━━━━━━━
+VOICEOVER SCRIPT
+━━━━━━━━━━━━━━━━━━━━━━━━
+Create a professional storytelling voiceover in ${language}. Requirements: human sounding, natural speech, emotional pacing, suspense pacing, dramatic storytelling. Add [Pause] [Shock] [Whisper] [Suspense] when appropriate. The script's natural spoken length must match ${duration}.
+
+━━━━━━━━━━━━━━━━━━━━━━━━
+SEO PACKAGE
+━━━━━━━━━━━━━━━━━━━━━━━━
+IMPORTANT: Voiceover Language = ${language}. SEO Language = ALWAYS ENGLISH.
+Generate: Platform Optimized Title, Platform Optimized Description, Platform Optimized Hashtags, Hook, CTA.
+
+━━━━━━━━━━━━━━━━━━━━━━━━
+FINAL CONTENT PACKAGE — GENERATE ALL SECTIONS BELOW
 ━━━━━━━━━━━━━━━━━━━━━━━━
 
-## 🎬 VIRAL CONCEPT
+## 🎬 SELECTED STORY CONCEPT
 Name: [Creative concept name]
-Angle: [Specific viral angle and why it works for ${platform}]
-Why It Will Go Viral: [Psychological reason]
+Viral Reason: [Why this angle works for ${platform}]
 Emotional Score: [X/10]
-Viral Potential: [X/10]
+Viral Score: [X/10]
+Retention Score: [X/10]
 
 ## ⚡ HOOK — First 3 Seconds
-[Single most powerful original line to STOP the scroll]
+[Single most powerful line to STOP the scroll]
 On-Screen Text: [Bold 3-5 word text overlay]
 
-## 📝 COMPLETE ORIGINAL NARRATION SCRIPT
-[Full original commentary-style narration in ${language}, natural spoken length matching ${duration}]
+## 📝 COMPLETE STORYTELLING VOICEOVER
+[Full script in ${language}, natural spoken length matching ${duration}]
 [Human storyteller voice — emotional and dramatic throughout]
 [Voice markers and curiosity hooks placed naturally]
-[Must be original phrasing, not quoted or closely paraphrased film dialogue]
 
-## 🎞️ MICRO-CLIP EDITING REFERENCE
-For EVERY narration section provide:
+## 🎞️ MICRO-CLIP EDITING PLAN
+For EVERY voiceover section provide:
 **Clip [N]**
-⏱ Approximate Timestamp: [Reference range from the attached SRT, e.g. around 00:05:00–00:05:10]
+⏱ Timestamp: [From the attached SRT file]
 ⏳ Duration: [2-5 sec]
 🎬 Scene: [What is happening at this timestamp]
-🎤 Narration: [Original narration lines for this clip]
+🎤 Voiceover: [Matching lines for this clip]
 🔍 Zoom: [In/Out/Static]
+📝 Text Overlay: [Suggested on-screen text]
 ✂️ Transition: [Cut/Fade/Smash cut]
 
 ## 📱 SEO PACKAGE — Always in English
-Title: [SEO optimized — max 60 characters]
-Description: [200 word SEO description with natural keywords]
-Tags: [30 relevant tags, comma separated]
+Title: [Platform optimized title — max 60 characters]
+Description: [Platform optimized description with natural keywords]
 Hashtags: [25 relevant hashtags]
-Thumbnail Text: [3-5 bold attention-grabbing words]
+Hook: [Scroll-stopping hook text]
 CTA: [Strong end-screen call to action]
-Best Upload Time: [Optimal posting time for ${platform}]
 
 ━━━━━━━━━━━━━━━━━━━━━━━━
 DELIVERY INSTRUCTIONS
 ━━━━━━━━━━━━━━━━━━━━━━━━
 This is a large deliverable that may exceed one response. If so, deliver it in multiple parts automatically:
-- Part 1: Viral Concept + Hook + Full Narration Script
-- Part 2: Complete Micro-Clip Editing Reference with approximate timestamps
+- Part 1: Selected Story Concept + Hook + Full Voiceover
+- Part 2: Complete Micro-Clip Editing Plan with all timestamps
 - Part 3: Full SEO Package
 
 Start Part 1 immediately. Do not ask any clarifying questions at any point. After each part ends, write "Continuing to Part [N]..." and continue automatically without waiting for my confirmation. Complete ALL parts fully before finishing.`;
