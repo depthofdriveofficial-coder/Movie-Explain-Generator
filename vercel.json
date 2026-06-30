@@ -1,7 +1,8 @@
 {
   "rewrites": [
     { "source": "/api/subtitle", "destination": "/api/subtitle.py" },
-    { "source": "/api/generate", "destination": "/api/generate.py" },
+    { "source": "/sitemap.xml", "destination": "/sitemap.xml" },
+    { "source": "/robots.txt", "destination": "/robots.txt" },
     { "source": "/(.*)", "destination": "/index.html" }
   ]
 }
