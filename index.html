@@ -342,13 +342,6 @@ footer a{color:var(--primary);text-decoration:none;}
       <button class="btn-primary" id="searchBtn" onclick="searchSubs()">Search</button>
     </div>
     <div id="subResults"></div>
-    <div class="or-div">OR</div>
-    <div class="upload-box" onclick="document.getElementById('srtFile').click()">
-      <div style="font-size:30px">📂</div>
-      <p><strong>Click to upload your SRT file</strong><br>Supports .srt and .txt files</p>
-      <input type="file" id="srtFile" accept=".srt,.txt" style="display:none" onchange="handleUpload(event)">
-    </div>
-    <div id="uploadStatus"></div>
   </div>
 
   <!-- STEP 2 -->
@@ -356,13 +349,14 @@ footer a{color:var(--primary);text-decoration:none;}
     <div class="step-header">
       <div class="step-num">2</div>
       <div>
-        <div class="step-title">Download Your SRT File</div>
-        <div class="step-sub">Download the SRT from Step 1 — you'll attach it directly to ChatGPT/Claude, no need to paste it here</div>
+        <div class="step-title">Generate & Use Your Prompt</div>
+        <div class="step-sub">One simple step to get your complete viral script</div>
       </div>
     </div>
     <p style="font-size:13px;color:var(--muted);line-height:1.7;background:#FAFAFA;border:1px solid var(--border);border-radius:12px;padding:14px">
-      💡 After generating your prompt below, open <strong>ChatGPT</strong> or <strong>Claude</strong>, attach your downloaded SRT file using the file upload button, paste the prompt, and send both together.
+      💡 Fill in your script settings below, click <strong>Generate Master Prompt</strong>, then open <strong>Claude.ai</strong> (recommended) or ChatGPT, attach your downloaded SRT file using the file upload button, paste the generated prompt, and send both together.
     </p>
+  </div>
   </div>
 
   <!-- STEP 3 -->
@@ -565,15 +559,6 @@ async function searchSubs() {
     res.innerHTML = `<div class="status">Error: ${e.message}</div>`;
   }
   btn.disabled = false; btn.textContent = 'Search';
-}
-
-function handleUpload(event) {
-  const file = event.target.files[0];
-  if (!file) return;
-  document.getElementById('uploadStatus').innerHTML = `<p style="color:var(--success);font-size:13px;margin-top:8px">✅ ${file.name} ready — remember to attach this file in ChatGPT/Claude along with the prompt!</p>`;
-  if (!document.getElementById('movieName').value) {
-    document.getElementById('movieName').value = file.name.replace(/\.srt$/i,'').replace(/[_\.]/g,' ').trim();
-  }
 }
 
 function updateDuration(val) {
