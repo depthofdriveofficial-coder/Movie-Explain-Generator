@@ -342,6 +342,13 @@ footer a{color:var(--primary);text-decoration:none;}
       <button class="btn-primary" id="searchBtn" onclick="searchSubs()">Search</button>
     </div>
     <div id="subResults"></div>
+    <div class="or-div">OR</div>
+    <div class="upload-box" onclick="document.getElementById('srtFile').click()">
+      <div style="font-size:30px">📂</div>
+      <p><strong>Click to upload your SRT file</strong><br>Supports .srt and .txt files</p>
+      <input type="file" id="srtFile" accept=".srt,.txt" style="display:none" onchange="handleUpload(event)">
+    </div>
+    <div id="uploadStatus"></div>
   </div>
 
   <!-- STEP 2 -->
@@ -349,14 +356,29 @@ footer a{color:var(--primary);text-decoration:none;}
     <div class="step-header">
       <div class="step-num">2</div>
       <div>
-        <div class="step-title">Generate & Use Your Prompt</div>
-        <div class="step-sub">One simple step to get your complete viral script</div>
+        <div class="step-title">SRT Content & Time Range</div>
+        <div class="step-sub">Paste/upload your SRT, then pick which portion to use</div>
       </div>
     </div>
-    <p style="font-size:13px;color:var(--muted);line-height:1.7;background:#FAFAFA;border:1px solid var(--border);border-radius:12px;padding:14px">
-      💡 Fill in your script settings below, click <strong>Generate Master Prompt</strong>, then open <strong>Claude.ai</strong> (recommended) or ChatGPT, attach your downloaded SRT file using the file upload button, paste the generated prompt, and send both together.
-    </p>
-  </div>
+    <textarea id="srtContent" placeholder="SRT content will appear here after download/upload... or paste manually"></textarea>
+    <div id="srtInfo" style="font-size:12px;color:var(--muted);margin-top:8px"></div>
+
+    <div style="margin-top:18px;padding-top:18px;border-top:1px solid var(--border)">
+      <label class="lbl">Select Time Range (Optional)</label>
+      <p style="font-size:12px;color:var(--muted);margin-bottom:12px">Watch the movie and note the start/end time of the best scene — leave blank to use the whole file.</p>
+      <div class="g2">
+        <div>
+          <label class="lbl" style="font-size:10px">Start Time (HH:MM:SS)</label>
+          <input type="text" id="startTime" placeholder="00:15:00">
+        </div>
+        <div>
+          <label class="lbl" style="font-size:10px">End Time (HH:MM:SS)</label>
+          <input type="text" id="endTime" placeholder="00:22:00">
+        </div>
+      </div>
+      <button class="btn-primary" style="width:100%;margin-top:12px" onclick="extractRange()">✂️ Extract This Portion</button>
+      <div id="extractStatus" style="font-size:12px;margin-top:8px"></div>
+    </div>
   </div>
 
   <!-- STEP 3 -->
@@ -435,7 +457,7 @@ footer a{color:var(--primary);text-decoration:none;}
       <div class="output-title">🎬 Your Master Prompt</div>
       <button class="btn-copy" id="copyBtn" onclick="copyPrompt()">📋 Copy Prompt</button>
     </div>
-    <p style="font-size:12px;color:var(--muted);margin-bottom:12px">✅ For best results, attach your SRT file and paste this prompt into <strong>Claude.ai</strong> (recommended). Some other AI tools may decline detailed scene-by-scene requests.</p>
+    <p style="font-size:12px;color:var(--muted);margin-bottom:12px">✅ This prompt includes your SRT content — just copy and paste it into <strong>Claude.ai</strong> (recommended) or ChatGPT. No file attachment needed.</p>
     <div class="output-box" id="outputBox"></div>
   </div>
 
@@ -561,6 +583,94 @@ async function searchSubs() {
   btn.disabled = false; btn.textContent = 'Search';
 }
 
+function handleUpload(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    document.getElementById('srtContent').value = e.target.result;
+    document.getElementById('uploadStatus').innerHTML = `<p style="color:var(--success);font-size:13px;margin-top:8px">✅ ${file.name} uploaded!</p>`;
+    if (!document.getElementById('movieName').value) {
+      document.getElementById('movieName').value = file.name.replace(/\.srt$/i,'').replace(/[_\.]/g,' ').trim();
+    }
+    updateSrtInfo();
+  };
+  reader.readAsText(file);
+}
+
+function timeToSeconds(t) {
+  const parts = t.split(':').map(Number);
+  if (parts.length === 3) return parts[0]*3600 + parts[1]*60 + parts[2];
+  if (parts.length === 2) return parts[0]*60 + parts[1];
+  return parts[0] || 0;
+}
+
+function srtTimeToSeconds(t) {
+  // format: 00:05:12,500
+  const clean = t.replace(',', '.');
+  const parts = clean.split(':').map(Number);
+  return parts[0]*3600 + parts[1]*60 + parts[2];
+}
+
+function updateSrtInfo() {
+  const srt = document.getElementById('srtContent').value;
+  const info = document.getElementById('srtInfo');
+  if (!srt.trim()) { info.textContent = ''; return; }
+  const chars = srt.length;
+  const matches = srt.match(/\d{2}:\d{2}:\d{2},\d{3}\s*-->\s*\d{2}:\d{2}:\d{2},\d{3}/g);
+  const entries = matches ? matches.length : 0;
+  let lastTime = '';
+  if (matches && matches.length) {
+    const last = matches[matches.length-1];
+    lastTime = last.split('-->')[1].trim().split(',')[0];
+  }
+  info.textContent = `📄 ${chars.toLocaleString()} characters · ${entries} subtitle entries${lastTime ? ' · Movie runs until ~' + lastTime : ''}`;
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  const srtBox = document.getElementById('srtContent');
+  if (srtBox) srtBox.addEventListener('input', updateSrtInfo);
+});
+
+function extractRange() {
+  const srt = document.getElementById('srtContent').value.trim();
+  const startStr = document.getElementById('startTime').value.trim();
+  const endStr = document.getElementById('endTime').value.trim();
+  const status = document.getElementById('extractStatus');
+
+  if (!srt) { status.innerHTML = '<span style="color:#DC2626">Please paste or upload an SRT file first.</span>'; return; }
+  if (!startStr || !endStr) { status.innerHTML = '<span style="color:#DC2626">Please enter both start and end time.</span>'; return; }
+
+  const startSec = timeToSeconds(startStr);
+  const endSec = timeToSeconds(endStr);
+
+  if (endSec <= startSec) { status.innerHTML = '<span style="color:#DC2626">End time must be after start time.</span>'; return; }
+
+  // Split SRT into blocks
+  const blocks = srt.split(/\n\s*\n/);
+  const selected = [];
+
+  blocks.forEach(block => {
+    const match = block.match(/(\d{2}:\d{2}:\d{2},\d{3})\s*-->\s*(\d{2}:\d{2}:\d{2},\d{3})/);
+    if (!match) return;
+    const blockStart = srtTimeToSeconds(match[1]);
+    const blockEnd = srtTimeToSeconds(match[2]);
+    if (blockEnd >= startSec && blockStart <= endSec) {
+      selected.push(block.trim());
+    }
+  });
+
+  if (selected.length === 0) {
+    status.innerHTML = '<span style="color:#DC2626">No subtitles found in that time range. Check your timestamps.</span>';
+    return;
+  }
+
+  const extracted = selected.join('\n\n');
+  document.getElementById('srtContent').value = extracted;
+  updateSrtInfo();
+  status.innerHTML = `<span style="color:var(--success)">✅ Extracted ${selected.length} subtitle entries from ${startStr} to ${endStr}</span>`;
+}
+
 function updateDuration(val) {
   const minutes = parseInt(val);
   const label = minutes === 1 ? '1 Minute' : `${minutes} Minutes`;
@@ -569,6 +679,7 @@ function updateDuration(val) {
 
 function generatePrompt() {
   const movie = document.getElementById('movieName').value.trim();
+  const srt = document.getElementById('srtContent').value.trim();
   const language = document.getElementById('language').value;
   const platform = document.getElementById('platform').value;
   const style = document.getElementById('style').value;
@@ -576,6 +687,7 @@ function generatePrompt() {
   const duration = durationMin === 1 ? '1 Minute' : `${durationMin} Minutes`;
 
   if (!movie) { alert('Please enter the movie name!'); return; }
+  if (!srt) { alert('Please paste or upload the SRT content in Step 2!'); return; }
 
   const lang = langInstructions[language];
 
@@ -583,7 +695,7 @@ function generatePrompt() {
 
 Your mission is to transform this movie into highly engaging short-form storytelling content optimized for ${platform}.
 
-I have ATTACHED the movie's SRT subtitle file to this message. Analyze the complete subtitle file. Do NOT ask any questions, do NOT ask me to paste the file again, and do NOT wait for confirmation — start generating immediately using the format below.
+Analyze the complete subtitle content provided below. Do NOT ask any questions, do NOT ask me to paste the file again, and do NOT wait for confirmation — start generating immediately using the format below.
 
 ━━━━━━━━━━━━━━━━━━━━━━━━
 CONTENT DETAILS
@@ -600,9 +712,14 @@ LANGUAGE RULE — MOST IMPORTANT
 ${lang.rule}
 
 ━━━━━━━━━━━━━━━━━━━━━━━━
+SUBTITLE CONTENT (SRT)
+━━━━━━━━━━━━━━━━━━━━━━━━
+${srt}
+
+━━━━━━━━━━━━━━━━━━━━━━━━
 FULL SRT ANALYSIS
 ━━━━━━━━━━━━━━━━━━━━━━━━
-Analyze the entire attached subtitle file. Detect:
+Analyze the entire subtitle content above. Detect:
 - Emotional Peaks
 - Shock Moments
 - Suspense Moments
@@ -701,7 +818,7 @@ On-Screen Text: [Bold 3-5 word text overlay]
 ## 🎞️ MICRO-CLIP EDITING PLAN
 For EVERY voiceover section provide:
 **Clip [N]**
-⏱ Timestamp: [From the attached SRT file]
+⏱ Timestamp: [From the subtitle content above]
 ⏳ Duration: [2-5 sec]
 🎬 Scene: [What is happening at this timestamp]
 🎤 Voiceover: [Matching lines for this clip]
