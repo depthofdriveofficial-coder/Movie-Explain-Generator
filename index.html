@@ -594,9 +594,9 @@ function generatePrompt() {
 
   const lang = langInstructions[language];
 
-  const prompt = `You are an Elite Movie Storytelling Agent, Viral Content Strategist, and Professional Script Writer. Your scripts have generated millions of views on YouTube, TikTok, and Instagram Reels.
+  const prompt = `You are an Elite Movie Commentary Creator, Viral Content Strategist, and Professional Script Writer. You create original, commentary-style storytelling content that discusses and reacts to movies for YouTube, TikTok, and Instagram Reels — similar to popular "movie recap" and "movie explained" creators.
 
-I have ATTACHED the movie's SRT subtitle file to this message (or pasted it directly below if no attachment was possible). This SRT file contains the full dialogue and exact timestamps of the movie. Carefully read and analyze the ENTIRE attached/pasted SRT file before writing anything. Do NOT ask any questions, do NOT ask me to paste the file again, and do NOT wait for confirmation. Start generating immediately using the attached file as your only source of scene content and timestamps.
+I have ATTACHED the movie's SRT subtitle file to this message. Use it only as a reference to identify which moments in the film are the most emotional, suspenseful or talked-about, and to find approximate timestamps for editing reference. Do NOT ask any questions, do NOT ask me to paste the file again, and do NOT wait for confirmation — start generating immediately.
 
 ━━━━━━━━━━━━━━━━━━━━━━━━
 CONTENT DETAILS
@@ -615,24 +615,25 @@ ${lang.rule}
 ━━━━━━━━━━━━━━━━━━━━━━━━
 YOUR TASK
 ━━━━━━━━━━━━━━━━━━━━━━━━
-1. Read the entire attached SRT file from start to finish
-2. Identify the most viral, emotional, shocking or suspenseful moments in the movie based on the "${style}" style
-3. Select ONLY the best scenes that together fit naturally within ${duration} of spoken narration — ignore all weaker or filler scenes
-4. Use the EXACT timestamps from the SRT file for every clip you reference — never invent or guess timestamps
-5. Write a complete, ready-to-film viral script package using the format below
+1. Review the attached SRT file to understand the film's key moments and overall structure
+2. Identify which moments are the most emotional, shocking or suspenseful, fitting the "${style}" angle
+3. Select the moments that together support a narration of approximately ${duration} when spoken aloud
+4. Reference approximate timestamps near those moments purely as editing guidance for the creator — these are reference points for finding footage, not a transcript
+5. Write an ORIGINAL commentary-style narration in your own words that discusses, reacts to, and builds suspense around these moments — do not reproduce or closely paraphrase the film's dialogue or shot-by-shot sequence
+6. Produce a complete, ready-to-film content package using the format below
 
 ━━━━━━━━━━━━━━━━━━━━━━━━
 CRITICAL STORYTELLING RULES
 ━━━━━━━━━━━━━━━━━━━━━━━━
-1. Write like a HUMAN STORYTELLER — NOT a reviewer, analyst or summarizer
-2. NEVER write: "In this movie...", "The protagonist...", "This film shows..."
-3. Write in dramatic, emotional, active storytelling voice — as if telling this story live to a captivated audience
+1. Write like a HUMAN COMMENTATOR/STORYTELLER reacting to and building suspense around the film — NOT a reviewer reciting plot, and NOT a transcript of the film's dialogue
+2. NEVER write generic lines like: "In this movie...", "The protagonist...", "This film shows..."
+3. Write in a dramatic, emotional, engaging narration voice — as if hyping up an audience about what happens, without quoting the film's actual lines
 4. Every 2-3 lines MUST have a curiosity hook to keep the viewer watching:
    ${lang.hookStyle}
-5. Make the audience FEEL fear, excitement, shock, curiosity, sadness — do not just describe events
+5. Make the audience FEEL fear, excitement, shock, curiosity, sadness through your own original phrasing
 6. Use voice direction markers throughout: [Pause] [Whisper] [Shock] [Suspense] [Fast] [Slow]
-7. The script's natural spoken length (at normal narration pace) must match ${duration} — not shorter, not longer
-8. Do not summarize the plot — TELL the story scene by scene like a gripping narrator
+7. The narration's natural spoken length (at normal pace) must match ${duration} — not shorter, not longer
+8. This must be an original commentary/narration in your own words — never copy or closely mirror lines from the film itself
 
 GOOD EXAMPLE IN ${language}:
 "${lang.example}"
@@ -641,11 +642,11 @@ BAD EXAMPLE (never do this):
 "The protagonist faces many challenges and the story revolves around the theme of dreams."
 
 ━━━━━━━━━━━━━━━━━━━━━━━━
-MICRO-CLIP RULES
+MICRO-CLIP EDITING REFERENCE
 ━━━━━━━━━━━━━━━━━━━━━━━━
-- Break the script into multiple 2-5 second micro-clips, never one long clip
-- Every voiceover section must be paired with its own exact timestamp from the attached SRT
-- The number of clips should be enough to cover the full ${duration} runtime with constant visual variety
+- Break the narration into multiple 2-5 second micro-clip references, never one long clip
+- Pair each narration section with an approximate timestamp range from the attached SRT as a guide for the editor to locate relevant footage
+- Provide enough clip references to cover the full ${duration} runtime with constant visual variety
 
 ━━━━━━━━━━━━━━━━━━━━━━━━
 GENERATE ALL SECTIONS BELOW — DO NOT SKIP ANY — DO NOT STOP EARLY
@@ -659,21 +660,22 @@ Emotional Score: [X/10]
 Viral Potential: [X/10]
 
 ## ⚡ HOOK — First 3 Seconds
-[Single most powerful line to STOP the scroll]
+[Single most powerful original line to STOP the scroll]
 On-Screen Text: [Bold 3-5 word text overlay]
 
-## 📝 COMPLETE VOICEOVER SCRIPT
-[Full script in ${language}, natural spoken length matching ${duration}]
+## 📝 COMPLETE ORIGINAL NARRATION SCRIPT
+[Full original commentary-style narration in ${language}, natural spoken length matching ${duration}]
 [Human storyteller voice — emotional and dramatic throughout]
 [Voice markers and curiosity hooks placed naturally]
+[Must be original phrasing, not quoted or closely paraphrased film dialogue]
 
-## 🎞️ MICRO-CLIP EDITING PLAN
-For EVERY voiceover section provide:
+## 🎞️ MICRO-CLIP EDITING REFERENCE
+For EVERY narration section provide:
 **Clip [N]**
-⏱ Timestamp: [EXACT from the attached SRT file]
+⏱ Approximate Timestamp: [Reference range from the attached SRT, e.g. around 00:05:00–00:05:10]
 ⏳ Duration: [2-5 sec]
 🎬 Scene: [What is happening at this timestamp]
-🎤 Voiceover: [Matching lines for this clip]
+🎤 Narration: [Original narration lines for this clip]
 🔍 Zoom: [In/Out/Static]
 ✂️ Transition: [Cut/Fade/Smash cut]
 
@@ -690,8 +692,8 @@ Best Upload Time: [Optimal posting time for ${platform}]
 DELIVERY INSTRUCTIONS
 ━━━━━━━━━━━━━━━━━━━━━━━━
 This is a large deliverable that may exceed one response. If so, deliver it in multiple parts automatically:
-- Part 1: Viral Concept + Hook + Full Voiceover Script
-- Part 2: Complete Micro-Clip Editing Plan with all exact timestamps
+- Part 1: Viral Concept + Hook + Full Narration Script
+- Part 2: Complete Micro-Clip Editing Reference with approximate timestamps
 - Part 3: Full SEO Package
 
 Start Part 1 immediately. Do not ask any clarifying questions at any point. After each part ends, write "Continuing to Part [N]..." and continue automatically without waiting for my confirmation. Complete ALL parts fully before finishing.`;
