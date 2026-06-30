@@ -10,13 +10,13 @@
 <meta name="author" content="Movie Explain Generator">
 <meta name="language" content="English">
 <meta name="revisit-after" content="7 days">
-<link rel="canonical" href="https://srt-black.vercel.app/">
+<link rel="canonical" href="https://movie-explain-generator.vercel.app/">
 
 <!-- Open Graph -->
 <meta property="og:title" content="Movie Explain Generator — Free AI Viral Script Tool">
 <meta property="og:description" content="Turn any movie SRT into a viral storytelling script for YouTube, TikTok & Reels. Free. No login. Works in 6 languages.">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://srt-black.vercel.app/">
+<meta property="og:url" content="https://movie-explain-generator.vercel.app/">
 <meta property="og:site_name" content="Movie Explain Generator">
 <meta property="og:locale" content="en_US">
 
@@ -31,7 +31,7 @@
   "@context": "https://schema.org",
   "@type": "WebApplication",
   "name": "Movie Explain Generator",
-  "url": "https://srt-black.vercel.app/",
+  "url": "https://movie-explain-generator.vercel.app/",
   "description": "Free AI-powered viral movie storytelling script generator for YouTube Shorts, TikTok, Instagram Reels and Facebook. Supports English, Roman Urdu, Roman Hindi, Urdu, Hindi and Arabic.",
   "applicationCategory": "EntertainmentApplication",
   "operatingSystem": "Any",
@@ -142,7 +142,7 @@
     "@type": "ListItem",
     "position": 1,
     "name": "Home",
-    "item": "https://srt-black.vercel.app/"
+    "item": "https://movie-explain-generator.vercel.app/"
   }]
 }
 </script>
@@ -531,10 +531,7 @@ const langInstructions = {
   }
 };
 
-const wordCounts = {
-  '30 Seconds':'~75 words','60 Seconds':'~150 words','90 Seconds':'~225 words',
-  '3 Minutes':'~450 words','5 Minutes':'~750 words','10 Minutes':'~1500 words'
-};
+
 
 async function searchSubs() {
   const movie = document.getElementById('movieSearch').value.trim();
@@ -595,7 +592,7 @@ function generatePrompt() {
   if (!srt) { alert('Please upload or paste the SRT content!'); return; }
 
   const lang = langInstructions[language];
-  const wordCount = wordCounts[duration];
+
 
   const prompt = `You are an Elite Movie Storytelling Agent, Viral Content Strategist, and Professional Script Writer. Your scripts have generated millions of views on YouTube, TikTok, and Instagram Reels.
 
@@ -608,7 +605,7 @@ Movie Name: ${movie}
 Script Language: ${language}
 Platform: ${platform}
 Content Style: ${style}
-Video Duration: ${duration} (${wordCount})
+Target Video Duration: ${duration}
 
 ━━━━━━━━━━━━━━━━━━━━━━━━
 LANGUAGE RULE — MOST IMPORTANT
@@ -630,7 +627,7 @@ CRITICAL STORYTELLING RULES
    ${lang.hookStyle}
 5. Make the audience FEEL fear, excitement, shock, curiosity, sadness
 6. Use voice markers: [Pause] [Whisper] [Shock] [Suspense] [Fast] [Slow]
-7. Script MUST be exactly ${wordCount}
+7. Analyze the entire SRT and automatically select the best viral scenes that fit naturally within ${duration} when read aloud. Do NOT use fixed word count. Choose scenes based on emotional impact, shock value and viral potential.
 
 GOOD EXAMPLE IN ${language}:
 "${lang.example}"
@@ -722,4 +719,3 @@ function toggleFaq(el) {
 </script>
 </body>
 </html>
-
